@@ -4,17 +4,20 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>HALLELUJAH</Text>
-      <StatusBar style="auto" />
+      <Square />
     </View>
   );
 }
+const Square = () => {
+  return <View style={styles.square} />;
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  square: {
+    width: 100,
+    height: 200,
+    backgroundColor: "white",
+    borderBottomColor:"black",
+    borderWidth:2
   },
 });
