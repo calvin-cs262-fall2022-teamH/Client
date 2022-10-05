@@ -1,49 +1,51 @@
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Switch, Text, View, FlatList } from 'react-native';
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 
 //makes a horrizontal line, given length, (x,y) displacement, a color, and thickness of the a line
-function hLine(length, x, y, color, width) {
-  return <View style={{width: length, height: 1, backgroundColor: color,
-  borderBottomColor: color,
-  borderWidth: width, top: y, marginLeft: x}} />;
-};
-//makes a vertical line, given length, (x,y) displacement, a color, and thickness of the a line
-function vLine(length, x, y, color, width) {
-  return <View style={{width: 1, height: length, backgroundColor: color,
-  borderColor:color,
-  borderWidth: width, top: y, marginLeft: x, position: 'absolute'}} />;
+function hLine(length, x, y, color) {
+  return <View
+  style={{
+    borderBottomColor: color,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    marginLeft:x,
+    marginTop:y,
+    width: length
+  }}
+/>;
 };
 
-function renderGrid() {
-  const grid = [];
-  const weekdays = ["Mon", "Tues", "Wed", "Thurs", "Fri"]
-  const times = ["8 AM","9 AM","10 AM","11 AM", "12 AM", "1 PM","2 PM","3 PM", "4 PM", "5 PM", "6 PM", "7 PM","8 PM","9 PM", "10 PM", "11 PM","12 PM"]
-  for (let i=40; i <= 250; i+=20) {
-    grid.push(vLine(250,i+20,30,"grey",1));
-    grid.push(hLine(210,50,i,"black",1));
+function renderGrid(item) {
+  const timeView = [];
+  const lineView = [];
+  const times = ["  8 AM","  9 AM","10 AM","11 AM", "12 AM", "  1 PM","  2 PM","  3 PM", "  4 PM", "  5 PM", "  6 PM", "  7 PM","  8 PM","  9 PM", "10 PM", "11 PM","12 PM"]
+  for (let i=0; i <= 16; i+=1) {
+    timeView.push(<Text style={{position:'absolute', marginTop:i*20+20}}>{times[i]}</Text>);
+    lineView.push(<View style={{position:'absolute'}}>{hLine(120,50,i*20+30,"black",1)}</View>)
   }
-  return grid;
+  return <View>
+    <Text style={{textAlign:"center"}}>{item}</Text>
+    {timeView}{lineView}
+    </View>;
+};
+
+const Listitem = ({ item }) => {
+  return (
+    <View style={{height:360, width: 200, backgroundColor: "grey", borderRadius:5}}>
+      {renderGrid(item)}
+    </View>
+  );
 };
 export default function App() {
   return (
-    <View style={styles.zoomWrapper}> 
-      <ReactNativeZoomableView
-        maxZoom={1.9}
-        minZoom={0.3}
-        zoomStep={80}
-        initialZoom={0.9}
-        bindToBorders={false}
-        captureEvent={true}
-        movementSensibility={5}
-        //style={styles.zoomWrapper}
-      >
-        <View style={{backgroundColor: "white", height:300, length:400, position: 'absolute'}}>
-        {renderGrid()}
-
-        </View>
-      </ReactNativeZoomableView>
-      </View>
+    <FlatList
+    style={{marginTop: 100, marginLeft: 20, marginRight:20}}
+    horizontal
+    data={["Mon", "Tues", "Wed", "Thurs", "Fri"]}
+    renderItem={({item}) => <Listitem item={item} />}
+    showsHorizontalScrollIndicator={true}
+    ItemSeparatorComponent={() => {return (<View style={{width:10}}/>);}}//the variable "width" affects space between elements in the list
+  />
   );
 }
 
