@@ -35,8 +35,8 @@ function renderGrid(item) {
   for (let i = 0; i <= 16; i += 1) {
     // timeView.push(<Text style={{ position: 'absolute', color: "white", marginTop: i * 20 + 30 }}>{times[i]}</Text>);     //  writes times
     // lineView.push(<View style={{ position: 'absolute' }}>{hLine(280, 50, i * 20 + 40, "white", 1)}</View>)               //  draws horiz lines
-    timeView.push(<Text style={{ position: 'absolute', color: "white", marginTop: i * heightPiece + 50 }}>{times[i]}</Text>);     //  writes times
-    lineView.push(<View style={{ position: 'absolute' }}>{hLine(280, 50, i * heightPiece + 60, "white", 1)}</View>)               //  draws horiz lines
+    timeView.push(<Text style={{ position: 'absolute', color: "white", marginTop: i * 2 * heightPiece + 50 }}>{times[i]}</Text>);     //  writes times
+    lineView.push(<View style={{ position: 'absolute' }}>{hLine(280, 50, i * 2 * heightPiece + 60, "white", 1)}</View>)               //  draws horiz lines
   }
   return <View>
     <Text style={{ textAlign: "center", fontSize: 24, color: "white" }}>{item}</Text>
@@ -46,7 +46,7 @@ function renderGrid(item) {
 
 const Listitem = ({ item }) => {
   return (
-    <View style={{ height: schedHeight, width: schedWidth, backgroundColor: primary, borderRadius: 5 }}>
+    <View style={{ height: window.innerHeight, width: schedWidth, backgroundColor: primary, borderRadius: 5 }}>
       {renderGrid(item)}
     </View>
   );
