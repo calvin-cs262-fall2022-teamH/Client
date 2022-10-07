@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, Switch, Text, View, FlatList } from 'react-native';
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
+import xlsxParser from './xlsxParser'
 
 //makes a horrizontal line, given length, (x,y) displacement, a color, and thickness of the a line
 function hLine(length, x, y, color) {
@@ -38,14 +39,15 @@ const Listitem = ({ item }) => {
 };
 export default function App() {
   return (
-    <FlatList
-    style={{marginTop: 100, marginLeft: 20, marginRight:20}}
-    horizontal
-    data={["Mon", "Tues", "Wed", "Thurs", "Fri"]}
-    renderItem={({item}) => <Listitem item={item} />}
-    showsHorizontalScrollIndicator={true}
-    ItemSeparatorComponent={() => {return (<View style={{width:10}}/>);}}//the variable "width" affects space between elements in the list
-  />
+  //   <FlatList
+  //   style={{marginTop: 100, marginLeft: 20, marginRight:20}}
+  //   horizontal
+  //   data={["Mon", "Tues", "Wed", "Thurs", "Fri"]}
+  //   renderItem={({item}) => <Listitem item={item} />}
+  //   showsHorizontalScrollIndicator={true}
+  //   ItemSeparatorComponent={() => {return (<View style={{width:10}}/>);}}//the variable "width" affects space between elements in the list
+  // />
+  <View>{xlsxParser()}</View>
   );
 }
 
