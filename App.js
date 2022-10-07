@@ -3,11 +3,15 @@ import { ScrollView, StyleSheet, Switch, Text, View, FlatList } from 'react-nati
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 
 /*  A space to declare global variables */
-let primary = "#F38C00";  // def primary color (orange)
+
+let primary = "#F3F3F3";  // def primary color (orange)
 let secondary = "#0167AB"; // def secondary color (blue)
-let schedHeight = 600;    //def height per day view
-let heightPiece = (schedHeight - 100) / 16; //height peice per hour
+let scrollSchedHeight = 600;  // def scrollView height of schedule
+let schedHeight = 2000; //def height per day (within the scroll view) nested within scrollSchedHeight
+let heightPiece = (schedHeight - 100) / 16; //height peice per hour (original (schedHeight-100)/ 16)
 let schedWidth = 350;     //def width per day view
+let textColoronSched = "black"
+
 
 
 /* function: hLine  -  draws horizontal lines
@@ -35,18 +39,20 @@ function renderGrid(item) {
   for (let i = 0; i <= 16; i += 1) {
     // timeView.push(<Text style={{ position: 'absolute', color: "white", marginTop: i * 20 + 30 }}>{times[i]}</Text>);     //  writes times
     // lineView.push(<View style={{ position: 'absolute' }}>{hLine(280, 50, i * 20 + 40, "white", 1)}</View>)               //  draws horiz lines
-    timeView.push(<Text style={{ position: 'absolute', color: "white", marginTop: i * 2 * heightPiece + 50 }}>{times[i]}</Text>);     //  writes times
-    lineView.push(<View style={{ position: 'absolute' }}>{hLine(280, 50, i * 2 * heightPiece + 60, "white", 1)}</View>)               //  draws horiz lines
+    timeView.push(<Text style={{ position: 'absolute', color: textColoronSched, marginTop: i * heightPiece + 50 }}>{times[i]}</Text>);     //  writes times
+    lineView.push(<View style={{ position: 'absolute' }}>{hLine(280, 50, i * heightPiece + 60, textColoronSched, 1)}</View>)               //  draws horiz lines
   }
   return <View>
-    <Text style={{ textAlign: "center", fontSize: 24, color: "white" }}>{item}</Text>
+    <Text style={{ textAlign: "center", fontSize: 24, color: textColoronSched }}>{item}</Text>
+
     {timeView}{lineView}
   </View>;
 };
 
 const Listitem = ({ item }) => {
   return (
-    <View style={{ height: window.innerHeight, width: schedWidth, backgroundColor: primary, borderRadius: 5 }}>
+    <View style={{ height: schedHeight, width: schedWidth, backgroundColor: primary, borderRadius: 5 }}>
+
       {renderGrid(item)}
     </View>
   );
@@ -65,7 +71,8 @@ export default function App() {
       }}
       horizontal
       data={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]}
-      renderItem={({ item }) => <Listitem item={item} />}
+      renderItem={({ item }) => <View style={{height:scrollSchedHeight}}><ScrollView><Listitem item={item} /></ScrollView></View>} 
+
       showsHorizontalScrollIndicator={true}
       showsVerticalScrollIndicator={true}
       ItemSeparatorComponent={() => { return (<View style={{ width: 10 }} />); }} //the variable "width" affects space between elements in the list

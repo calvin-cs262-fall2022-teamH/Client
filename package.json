@@ -18,7 +18,8 @@
     "react-drawline": "^1.1.0",
     "react-native": "0.69.6",
     "react-native-hr-component": "^2.0.3",
-    "react-native-pinch-zoom-view": "^0.2.0"
+    "react-native-pinch-zoom-view": "^0.2.0",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.18.12/xlsx-0.18.12.tgz"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
