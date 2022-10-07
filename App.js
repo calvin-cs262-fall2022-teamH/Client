@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, Switch, Text, View, FlatList } from 'react-nati
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 
 /*  A space to declare global variables */
+
 let primary = "#F3F3F3";  // def primary color (orange)
 let secondary = "#0167AB"; // def secondary color (blue)
 let scrollSchedHeight = 600;  // def scrollView height of schedule
@@ -10,6 +11,7 @@ let schedHeight = 2000; //def height per day (within the scroll view) nested wit
 let heightPiece = (schedHeight - 100) / 16; //height peice per hour (original (schedHeight-100)/ 16)
 let schedWidth = 350;     //def width per day view
 let textColoronSched = "black"
+
 
 
 /* function: hLine  -  draws horizontal lines
@@ -42,6 +44,7 @@ function renderGrid(item) {
   }
   return <View>
     <Text style={{ textAlign: "center", fontSize: 24, color: textColoronSched }}>{item}</Text>
+
     {timeView}{lineView}
   </View>;
 };
@@ -49,6 +52,7 @@ function renderGrid(item) {
 const Listitem = ({ item }) => {
   return (
     <View style={{ height: schedHeight, width: schedWidth, backgroundColor: primary, borderRadius: 5 }}>
+
       {renderGrid(item)}
     </View>
   );
@@ -68,6 +72,7 @@ export default function App() {
       horizontal
       data={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]}
       renderItem={({ item }) => <View style={{height:scrollSchedHeight}}><ScrollView><Listitem item={item} /></ScrollView></View>} 
+
       showsHorizontalScrollIndicator={true}
       showsVerticalScrollIndicator={true}
       ItemSeparatorComponent={() => { return (<View style={{ width: 10 }} />); }} //the variable "width" affects space between elements in the list
