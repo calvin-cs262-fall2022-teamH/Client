@@ -5,7 +5,7 @@ import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/R
 /*  A space to declare global variables */
 let primary = "#F38C00";      //  default primary color     (orange)
 let secondary = "#0167AB";    //  default secondary color   (blue)
-let bgColor = "white";        //  default background color  (white in LM) (black in DM)
+let bgColor = "bgColor";        //  default background color  (white in LM) (black in DM)
 let textColor = "black";      //  default textcolor         (black in LM) (white in DM)
 const windowWidth = Dimensions.get('window').width;         //full height of screen
 const windowHeight = Dimensions.get('window').height;       //full width of screen
@@ -42,6 +42,9 @@ function goProfile() { }
 /* function: goNotification      notification bell icon clicked -> notification popup */
 function goNotification() { }
 
+/* function: goAdd      add icon clicked -> add event page/popup */
+function goAdd() { }
+
 
 /* function: renderGrid  -  times & lines placed
   @params: item
@@ -71,7 +74,7 @@ const Listitem = ({ item }) => {
     <View style={{
       height: 1.5 * windowHeight,
       width: windowWidth - 20,
-      backgroundColor: "#EFEFEF",
+      // backgroundColor: "#EFEFEF",
       borderRadius: 5,
       marginRight: 20
     }}>
@@ -86,7 +89,7 @@ export default function App() {
     <View>
 
       {/* Header Toolbar (with profile, notification bell, and logo) */}
-      <View style={{ backgroundColor: "white", height: .14 * windowHeight }}>
+      <View style={{ backgroundColor: "bgColor", height: .14 * windowHeight }}>
 
         {/* Profile Icon (top left)*/}
         <TouchableOpacity onPress={goProfile}>
@@ -97,10 +100,9 @@ export default function App() {
             top: 50,
             left: 20
           }} source={require('./Icons/profile.png')} />
-
         </TouchableOpacity>
 
-        {/* Profile Icon (top left)*/}
+        {/* Notifcation Icon (top left)*/}
         <TouchableOpacity onPress={goNotification}>
           <Image style={{
             height: 35,
@@ -128,7 +130,7 @@ export default function App() {
       {/* Schedule on homeScreen */}
       <FlatList
         style={{
-          borderVerticalColor: "black",
+          borderVerticalColor: textColor,
           borderTopWidth: 3,
           borderBottomWidth: 3,
           marginVerital: 5,
@@ -137,6 +139,22 @@ export default function App() {
         horizontal
         data={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]}
         renderItem={({ item }) => <View style={{ height: .75 * windowHeight }}>
+
+          {/* Settings Icon (bottom left)*/}
+          <TouchableOpacity onPress={goAdd}>
+            <Image style={{
+              height: 70,
+              width: 70,
+              position: "absolute",
+              top: .65 * windowHeight,
+              left: .78 * windowWidth,
+              backgroundColor: primary,
+              borderWidth: 6,
+              borderColor: "bgColor",
+              borderRadius: 100,
+
+            }} source={require('./Icons/add.png')} />
+          </TouchableOpacity>
 
           <ScrollView>
             <Listitem item={item} />
@@ -148,7 +166,7 @@ export default function App() {
       />
 
       {/* Footer Toolbar (with settings and share) */}
-      <View style={{ backgroundColor: "white", height: .1 * windowHeight, width: windowWidth, position: "absolute", top: .95 * windowHeight }}>
+      <View style={{ backgroundColor: "bgColor", height: .1 * windowHeight, width: windowWidth, position: "absolute", top: .95 * windowHeight }}>
 
         {/* Settings Icon (bottom left)*/}
         <TouchableOpacity onPress={goSettings}>
@@ -176,6 +194,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-
-});
+const styles = StyleSheet.create({});
