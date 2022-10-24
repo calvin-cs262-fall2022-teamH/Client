@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Image, ScrollView, StyleSheet, Switch, Text, View, FlatList, TouchableOpacity, Dimensions } from 'react-native';
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
+import event from Components;
 
 /*  A space to declare global variables */
 let primary = "#F38C00";      //  default primary color     (orange)
