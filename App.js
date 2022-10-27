@@ -4,14 +4,13 @@ import { Image, ScrollView, StyleSheet, Switch, Text, View, FlatList, TouchableO
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 
 /*  A space to declare global variables */
-let primary = "#F38C00";      //  default primary color     (orange)
+let primary   = "#F38C00";    //  default primary color     (orange)
 let secondary = "#0167AB";    //  default secondary color   (blue)
-let bgColor = "bgColor";        //  default background color  (white in LM) (black in DM)
+let bgColor   = "white";      //  default background color  (white in LM) (black in DM)
 let textColor = "black";      //  default textcolor         (black in LM) (white in DM)
 const windowWidth = Dimensions.get('window').width;         //full height of screen
 const windowHeight = Dimensions.get('window').height;       //full width of screen
 let heightPiece = (windowHeight) / 12;                      //height peice per hour
-
 
 /* function: hLine    to draw horizontal lines
   @params: length, (x, y) displacement, color, thickness
@@ -87,9 +86,11 @@ const Listitem = ({ item }) => {
 
 export default function App() {
   return (
+    // homeScreen view of schedule + icons
     <View>
 
-      {/* Header Toolbar (with profile, notification bell, and logo) */}
+      {/* -----------------------------------------------------------------
+      START of Header Toolbar (with profile, notification bell, and logo) */}
       <View style={{ backgroundColor: "bgColor", height: .14 * windowHeight }}>
 
         {/* Profile Icon (top left)*/}
@@ -114,7 +115,6 @@ export default function App() {
           }} source={require('./Icons/notification.png')} />
         </TouchableOpacity>
 
-
         {/* workAround logo / home button */}
         <TouchableOpacity
           style={{ position: "absolute" }} onPress={goHome}>
@@ -127,8 +127,12 @@ export default function App() {
           }} source={require('./Icons/workAround.png')} />
         </TouchableOpacity>
       </View>
+      {/* END of Header Toolbar (with profile, notification bell, and logo)
+      ------------------------------------------------------------------- */}
 
-      {/* Schedule on homeScreen */}
+
+      {/* ------------------------------
+      START of Schedule on homeScreen*/}
       <FlatList
         style={{
           borderVerticalColor: textColor,
@@ -142,18 +146,24 @@ export default function App() {
         renderItem={({ item }) => <View style={{ height: .75 * windowHeight }}>
 
 
+
           <ScrollView>
             <Listitem item={item} />
+            <Event></Event>
           </ScrollView>
+
         </View >}
 
         showsHorizontalScrollIndicator={true}
         showsVerticalScrollIndicator={true}
       />
+      {/* END of Schedule on homeScreen
+      --------------------------------*/}
 
-      {/* Footer Toolbar (with settings and share) */}
+
+      {/* ----------------------------------------------
+      START of Footer Toolbar (with settings and share)*/}
       <View style={{ backgroundColor: "bgColor", height: .1 * windowHeight, width: windowWidth, position: "absolute", top: .95 * windowHeight }}>
-
         {/* Settings Icon (bottom left)*/}
         <TouchableOpacity onPress={goSettings}>
           <Image style={{
@@ -175,6 +185,9 @@ export default function App() {
           }} source={require('./Icons/share.png')} />
         </TouchableOpacity>
       </View>
+      {/* END of Footer Toolbar (with settings and share)
+      ------------------------------------------------ */}
+
 
           {/* Add Icon (bottom right on sched) */}
           <TouchableOpacity onPress={goAdd}>
@@ -193,6 +206,7 @@ export default function App() {
               bottom: 25,
             }} source={require('./Icons/add.png')} />
           </TouchableOpacity>
+
     </View>
   );
 }
