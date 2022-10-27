@@ -142,21 +142,6 @@ export default function App() {
         data={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]}
         renderItem={({ item }) => <View style={{ height: .75 * windowHeight }}>
 
-          {/* Settings Icon (bottom left)*/}
-          <TouchableOpacity onPress={goAdd}>
-            <Image style={{
-              height: 70,
-              width: 70,
-              position: "absolute",
-              top: .65 * windowHeight,
-              left: .78 * windowWidth,
-              backgroundColor: primary,
-              borderWidth: 6,
-              borderColor: "bgColor",
-              borderRadius: 100,
-
-            }} source={require('./Icons/add.png')} />
-          </TouchableOpacity>
 
           <ScrollView>
             <Listitem item={item} />
@@ -190,8 +175,25 @@ export default function App() {
             left: windowWidth - 70,
           }} source={require('./Icons/share.png')} />
         </TouchableOpacity>
-
       </View>
+
+          {/* Add Icon (bottom right on sched) */}
+          <TouchableOpacity onPress={goAdd}>
+            <Image style={{
+              // styling add-icon
+              height: 60,
+              width: 60,
+              opacity: .8,
+              backgroundColor: primary,
+              borderColor: "bgColor",
+              borderRadius: 50,
+
+              // positioning add-icon
+              position: "absolute",
+              left: windowWidth - 70,
+              bottom: 25,
+            }} source={require('./Icons/add.png')} />
+          </TouchableOpacity>
     </View>
   );
 }
