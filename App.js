@@ -74,7 +74,6 @@ const Listitem = ({ item }) => {
     <View style={{
       height: 1.5 * windowHeight,
       width: windowWidth - 20,
-      // backgroundColor: "#EFEFEF",
       borderRadius: 5,
       marginRight: 20
     }}>
@@ -145,11 +144,9 @@ export default function App() {
         data={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]}
         renderItem={({ item }) => <View style={{ height: .75 * windowHeight }}>
 
-
-
           <ScrollView>
-            <Listitem item={item} />
-            <Event></Event>
+              <Listitem item={item} />
+          <Event> </Event>
           </ScrollView>
 
         </View >}

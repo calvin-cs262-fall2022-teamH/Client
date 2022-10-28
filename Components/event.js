@@ -7,12 +7,24 @@ import { globalStyles } from '../shared/global'
 export default function Event({ navigation }) {
     const [details, setDetails] = useState([
         {
-            title: "CS-108", startTime: "10:00", endTime: "11:30",
-            location: "SB 223"
+            title: "CS-108",
+            startTime: "9:30", endTime: "10:20", location: "SB 223"
         },
         {
-            title: "Eng-220", startTime: "12:00", endTime: "1:00",
-            location: "CFAC-254"
+            title: "MATH-171",
+            startTime: "11:00", endTime: "11:50", location: "NH 159"
+        },
+        {
+            title: "ENGL-101",
+            startTime: "12:00", endTime: "12:50", location: "CFAC 242"
+        },
+        {
+            title: "REL-121",
+            startTime: "2:00", endTime: "2:50", location: "HH 133"
+        },
+        {
+            title: "CS-195",
+            startTime: "3:00", endTime: "3:50", location: "SB 010"
         },
     ]);
     return (
@@ -28,9 +40,8 @@ export default function Event({ navigation }) {
                         {item.startTime}
                         <Text> - </Text>
                         {item.endTime}
-                    </Text>
-                    <Text style={globalStyles.eventText}>
-                        <Text>({item.location})</Text>
+                        <Text>  </Text>
+                        ({item.location})
                     </Text>
                 </TouchableOpacity>
             )} />
