@@ -47,6 +47,17 @@ function goNotification() { }
 /* function: goAdd      add icon clicked -> add event page/popup */
 function goAdd() { }
 
+/* function: goOptions      add event clicked -> event page */
+function goOptions() {
+  <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="Options" component={Options} />
+      <Stack.Screen name="Silence" component={Silence} />
+      <Stack.Screen name="Delete" component={Delete} />
+    </Stack.Navigator>
+  </NavigationContainer>
+ }
+
 
 /* function: renderGrid  -  times & lines placed
   @params: item
