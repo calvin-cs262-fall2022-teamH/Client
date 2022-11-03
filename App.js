@@ -1,80 +1,58 @@
-// Example of Calendar with Events Listed in React Native
-// https://aboutreact.com/example-of-calendar-with-events-listed-in-react-native/
-
-// import React in our code
 import React, {useState} from 'react';
-
-// import all the components we are going to use
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Dimensions
-} from 'react-native';
-
-//import EventCalendar component
+import { SafeAreaView, StyleSheet, View, Dimensions} from 'react-native';
 import EventCalendar from 'react-native-events-calendar';
-
-//get the size of device
 let {width} = Dimensions.get('window');
 
 const App = () => {
   const [events, setEvents] = useState([
     {
-      start: '2020-01-01 00:00:00',
-      end: '2020-01-01 02:00:00',
-      title: 'New Year Party',
-      summary: 'xyz Location',
+      title: 'CS-108',
+      summary: 'SB 223',
+      start: '2022-11-05 08:30:00',
+      end: '2022-11-05 09:30:00',
     },
     {
-      start: '2020-01-01 01:00:00',
-      end: '2020-01-01 02:00:00',
-      title: 'New Year Wishes',
-      summary: 'Call to every one',
+      title: 'MATH-171',
+      summary: 'NH 159',
+      start: '2022-11-05 11:00:00',
+      end: '2022-11-05 11:50:00',
     },
     {
-      start: '2020-01-02 00:30:00',
-      end: '2020-01-02 01:30:00',
-      title: 'Parag Birthday Party',
-      summary: 'Call him',
+      title: 'ENGL-101',
+      summary: 'CFAC 242',
+      start: '2022-11-05 12:00:00',
+      end: '2022-11-05 12:50:00',
     },
     {
-      start: '2020-01-03 01:30:00',
-      end: '2020-01-03 02:20:00',
-      title: 'My Birthday Party',
-      summary: 'Lets Enjoy',
+      title: 'REL-121',
+      summary: 'HH 133',
+      start: '2022-11-05 14:00:00',
+      end: '2022-11-05 14:50:00',
     },
     {
-      start: '2020-02-04 04:10:00',
-      end: '2020-02-04 04:40:00',
-      title: 'Engg Expo 2020',
-      summary: 'Expoo Vanue not confirm',
+      title: 'CS-195',
+      summary: 'SB 010',
+      start: '2022-11-03 00:00:00',
+      end: '2022-11-03 00:00:00',
     },
   ]);
 
-  const eventClicked = (event) => {
-    //On Click of event showing alert from here
-    alert(JSON.stringify(event));
+  //On Click of event showing alert from here
+  const editEvent = (event) => {
+    alert("TODO: Add Edit for:\n\n" + (event.title) +"\n"+ (event.summary)
+          +"\nstart: "+ (event.start) +"\nend: "+ (event.end));
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <EventCalendar
-          eventTapped={eventClicked}
-          // Function on event press
-          events={events}
-          // Passing the Array of event
-          width={width}
-          // Container width
-          size={60}
-          // number of date will render before and after initDate
-          // (default is 30 will render 30 day before initDate
-          // and 29 day after initDate)
-          initDate={'2020-01-01'}
-          // Show initial date (default is today)
-          scrollToFirst
-          // Scroll to first event of the day (default true)
+          eventTapped={editEvent}// Function on event press
+          events={events}           // Passing the Array of event
+          width={width}             // Container width
+          //number of dates rendered before & after initDate (def 30 before, 29 after)
+          size={60}                 //initDate defaulting to today
+          scrollToFirst             // Scroll to first event of the day (default true)
         />
       </View>
     </SafeAreaView>
@@ -89,8 +67,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-
 
 
 // import { StatusBar } from 'expo-status-bar';
@@ -124,6 +100,8 @@ const styles = StyleSheet.create({
 //   />;
 // };
 
+
+
 // /* function: goHome    workAround logo clicked -> homeScreen */
 // function goHome() { }
 
@@ -142,6 +120,11 @@ const styles = StyleSheet.create({
 // /* function: goAdd      add icon clicked -> add event page/popup */
 // function goAdd() { }
 
+//   //On Click of event showing alert from here
+//   const editEvent = (event) => {
+//     alert("TODO: Add Edit for:\n\n" + (event.title) +"\n"+ (event.summary)
+//           +"\nstart: "+ (event.start) +"\nend: "+ (event.end));
+//   };
 
 // /* function: renderGrid  -  times & lines placed
 //   @params: item
@@ -182,8 +165,15 @@ const styles = StyleSheet.create({
 //   );
 // };
 
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },})
 
 // export default function App() {
+
 //   return (
 //     // homeScreen view of schedule + icons
 //     <View>
@@ -232,26 +222,19 @@ const styles = StyleSheet.create({
 
 //       {/* ------------------------------
 //       START of Schedule on homeScreen*/}
-//       <SafeAreaView>
-//       <View>
-//         <EventCalendar
-//           // eventTapped={eventClicked} //Function on event press
 
-//           events={Event}    //passing the Array of event
-
-//           width={windowWidth}   //Container width
-
-//           size={60}
-//           //number of date will render before and after initDate
-//           //(default is 30 will render 30 day before initDate and 29 day after initDate)
-//           initDate={'2020-01-01'}
-//           //show initial date (default is today)
-//           scrollToFirst
-//           //scroll to first event of the day (default true)
-//         />
-//       </View>
-//     </SafeAreaView>
-
+//      <SafeAreaView style={styles.container}>
+//        <View style={styles.container}>
+//          <EventCalendar
+//            eventTapped={editEvent}// Function on event press
+//            events={events}           // Passing the Array of event
+//            width={width}             // Container width
+//            //number of dates rendered before & after initDate (def 30 before, 29 after)
+//            size={60}                 //initDate defaulting to today
+//            scrollToFirst             // Scroll to first event of the day (default true)
+//          />
+//        </View>
+//      </SafeAreaView>
 
 //       {/* <FlatList
 //         style={{

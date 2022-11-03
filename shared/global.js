@@ -48,4 +48,10 @@ export const globalStyles = StyleSheet.create({
         marginBottom: 20,
     },
 
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
+
 });
