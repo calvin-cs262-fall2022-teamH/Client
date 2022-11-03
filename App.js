@@ -1,13 +1,14 @@
 
 import { StatusBar } from 'expo-status-bar';
 import Event from './Components/event';
-import { Image, ScrollView, StyleSheet, Switch, Text, View, FlatList, TouchableOpacity, Dimensions } from 'react-native';
+import { Image, ScrollView, StyleSheet, Switch, Text, View, FlatList, TouchableOpacity, Dimensions, Settings } from 'react-native';
 import React from 'react';
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Options from './screens/options';
 import Delete from './screens/delete';
+import SettingsScreen from './screens/settings';
 
 /*  A space to declare global variables */
 let primary = "#F38C00";      //  default primary color     (orange)
@@ -184,7 +185,8 @@ export default function App() {
 
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="Options" component={Options} />
+            <Stack.Screen name="Settings" component={Settings} />
+            
             <Stack.Screen name="Delete" component={Delete} />
           </Stack.Navigator>
         </NavigationContainer>
