@@ -2,7 +2,12 @@
 import { StatusBar } from 'expo-status-bar';
 import Event from './Components/event';
 import { Image, ScrollView, StyleSheet, Switch, Text, View, FlatList, TouchableOpacity, Dimensions } from 'react-native';
+import React from 'react';
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Options from './screens/options';
+import Delete from './screens/delete';
 
 /*  A space to declare global variables */
 let primary = "#F38C00";      //  default primary color     (orange)
@@ -12,6 +17,8 @@ let textColor = "black";      //  default textcolor         (black in LM) (white
 const windowWidth = Dimensions.get('window').width;         //full height of screen
 const windowHeight = Dimensions.get('window').height;       //full width of screen
 let heightPiece = (windowHeight) / 12;                      //height peice per hour
+const Stack = createNativeStackNavigator();                 //stack declaration
+
 
 
 /* function: hLine    to draw horizontal lines
@@ -33,7 +40,9 @@ function hLine(length, x, y, color) {
 function goHome() { }
 
 /* function: goSettings    settings icon clicked -> settings page */
-function goSettings() { }
+const goSettings  = props => {
+  props.navigation.navigate('Settings')
+ }
 
 /* function: goShare      share icon clicked -> share popup */
 function goShare() { }
@@ -48,15 +57,7 @@ function goNotification() { }
 function goAdd() { }
 
 /* function: goOptions      add event clicked -> event page */
-function goOptions() {
-  <NavigationContainer>
-    <Stack.Navigator>
-      <Stack.Screen name="Options" component={Options} />
-      <Stack.Screen name="Silence" component={Silence} />
-      <Stack.Screen name="Delete" component={Delete} />
-    </Stack.Navigator>
-  </NavigationContainer>
- }
+function goOptions() {}
 
 
 /* function: renderGrid  -  times & lines placed
@@ -181,8 +182,15 @@ export default function App() {
       {/* Footer Toolbar (with settings and share) */}
       <View style={{ backgroundColor: "bgColor", height: .1 * windowHeight, width: windowWidth, position: "absolute", top: .95 * windowHeight }}>
 
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Options" component={Options} />
+            <Stack.Screen name="Delete" component={Delete} />
+          </Stack.Navigator>
+        </NavigationContainer>
+
         {/* Settings Icon (bottom left)*/}
-        <TouchableOpacity onPress={goSettings}>
+        <TouchableOpacity onPress={() => goSettings(props)}>
           <Image style={{
             height: 45,
             width: 45,
