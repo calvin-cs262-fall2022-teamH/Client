@@ -31,6 +31,9 @@ function goNotification() { }
 /* function: goAdd               add icon clicked -> add event page/popup             */
 function goAdd() { }
 
+/* function: goOptions      add event clicked -> event page */
+function goOptions() {}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -150,10 +153,18 @@ export default function App() {
 
       {/* ----------------------------------------------
       START of Footer Toolbar (with settings and share)*/}
+
       <View style={{ backgroundColor: "bgColor", height: .1 * windowHeight, width: windowWidth, position: "absolute", top: .95 * windowHeight }}>
 
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Options" component={Options} />
+            <Stack.Screen name="Delete" component={Delete} />
+          </Stack.Navigator>
+        </NavigationContainer>
+
         {/* Settings Icon (bottom left)*/}
-        <TouchableOpacity onPress={goSettings}>
+        <TouchableOpacity onPress={() => goSettings(props)}>
           <Image style={{
             height: 45,
             width: 45,
@@ -162,7 +173,6 @@ export default function App() {
             top: -3,
           }} source={require('./Icons/settings.png')} />
         </TouchableOpacity>
-
       {/* Share Icon (bottom right)*/}
       <TouchableOpacity onPress={goShare}>
         <Image style={{
@@ -194,7 +204,6 @@ export default function App() {
         bottom: 25,
       }} source={require('./Icons/add.png')} />
     </TouchableOpacity>
-
     </View>
   );
 }
