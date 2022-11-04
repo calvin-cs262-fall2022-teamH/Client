@@ -9,6 +9,11 @@
 import { Image, StyleSheet, View, TouchableOpacity, Dimensions } from 'react-native';
 import EventCalendar from 'react-native-events-calendar';
 import React, {useState} from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Options from './screens/options';
+import Delete from './screens/delete';
+// import SettingsScreen from './screens/settings';
 
 /*  A space to declare global variables */
 let primary   = "#F38C00";    //  default primary color     (orange)
@@ -17,6 +22,7 @@ let bgColor   = "white";      //  default background color  (white in LM) (black
 let textColor = "black";      //  default textcolor         (black in LM) (white in DM)
 const windowWidth = Dimensions.get('window').width;         //full height of screen
 const windowHeight = Dimensions.get('window').height;       //full width of screen
+const Stack = createNativeStackNavigator();                 //stack declaration
 
 /* function: goHome              workAround logo clicked -> homeScreen                */
 function goHome() { }
