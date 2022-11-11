@@ -16,6 +16,13 @@ import SettingsScreen from './screens/Settings';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useRef } from 'react';
+import React, {useState} from 'react';
+import { Image, StyleSheet, View, TouchableOpacity, Dimensions, Settings } from 'react-native';
+import EventCalendar from 'react-native-events-calendar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Delete from './screens/delete';
+import SettingsScreen from './screens/settings';
 
 
 /*  A space to declare global variables */
@@ -25,6 +32,7 @@ let bgColor = "white";      //  default background color  (white in LM) (black i
 let textColor = "black";      //  default textcolor         (black in LM) (white in DM)
 const windowWidth = Dimensions.get('window').width;         //full height of screen
 const windowHeight = Dimensions.get('window').height;       //full width of screen
+const Stack = createNativeStackNavigator();                 //stack declaration
 
 const Tab = createBottomTabNavigator();
 
@@ -41,7 +49,6 @@ function goProfile() { }
 function goNotification() { }
 /* function: goAdd               add icon clicked -> add event page/popup             */
 function goAdd() { }
-
 /* function: goOptions      add event clicked -> event page */
 function goOptions() { }
 
@@ -181,6 +188,15 @@ function HomeScreen({ navigation }) {
 
       <View style={{ backgroundColor: "bgColor", height: .1 * windowHeight, width: windowWidth, position: "absolute", top: .95 * windowHeight }}>
 
+
+
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Settings" component={SettingsScreen} />
+
+            <Stack.Screen name="Delete" component={Delete} />
+          </Stack.Navigator>
+        </NavigationContainer>
 
         {/* Settings Icon (bottom left)*/}
         <TouchableOpacity onPress={() => goSettings(props)}>
