@@ -3,7 +3,6 @@ import {Text, View, FlatList, TouchableOpacity } from 'react-native';
 import { globalStyles } from '../shared/global'
 
 
-
 export default function Event({ navigation }) {
     const [details, setDetails] = useState([
         {
@@ -27,6 +26,7 @@ export default function Event({ navigation }) {
             start: "3:00", end: "3:50", summary: "SB 010"
 
         },
+
     ]);
     return (
         <View style={globalStyles.eventsContainer}>
@@ -38,6 +38,7 @@ export default function Event({ navigation }) {
                         {item.title}
                     </Text>
                     <Text style={globalStyles.eventText}>
+
                         {item.start}
                         <Text> - </Text>
                         {item.end}
@@ -50,5 +51,4 @@ export default function Event({ navigation }) {
         </View>
     )
 }
-
 
