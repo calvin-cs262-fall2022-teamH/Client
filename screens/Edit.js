@@ -1,7 +1,7 @@
 import { KeyboardAvoidingView, Image, ScrollView, StyleSheet, Switch, Text, View, FlatList, TouchableOpacity, Button, Dimensions, Platform, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import Checkbox from '../checkbox/Checkbox';
+import Checkbox from '../Components/Checkbox';
 
 const Edit= props => {
         const [Sun, setSun] = useState(false);
