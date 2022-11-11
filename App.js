@@ -1,109 +1,112 @@
+/*  WorkAround App.js
 
+  Programmed by:
+  - Tanvi Kulkarni
+  - Connor Broekhuizen
+  - Braden Lint
+  - Logan Humphrey
+*/
 import { StatusBar } from 'expo-status-bar';
 import Event from './Components/event';
 import { Image, ScrollView, StyleSheet, Switch, Text, View, FlatList, TouchableOpacity, Dimensions, Settings } from 'react-native';
 import React from 'react';
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
+import { Image, StyleSheet, View, TouchableOpacity, Dimensions } from 'react-native';
+import EventCalendar from 'react-native-events-calendar';
+import React, {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Options from './screens/options';
 import Delete from './screens/delete';
 import SettingsScreen from './screens/settings';
 
+
 /*  A space to declare global variables */
-let primary = "#F38C00";      //  default primary color     (orange)
+let primary   = "#F38C00";    //  default primary color     (orange)
 let secondary = "#0167AB";    //  default secondary color   (blue)
-let bgColor = "bgColor";        //  default background color  (white in LM) (black in DM)
+let bgColor   = "white";      //  default background color  (white in LM) (black in DM)
 let textColor = "black";      //  default textcolor         (black in LM) (white in DM)
 const windowWidth = Dimensions.get('window').width;         //full height of screen
 const windowHeight = Dimensions.get('window').height;       //full width of screen
-let heightPiece = (windowHeight) / 12;                      //height peice per hour
 const Stack = createNativeStackNavigator();                 //stack declaration
 
-
-
-/* function: hLine    to draw horizontal lines
-  @params: length, (x, y) displacement, color, thickness
-*/
-function hLine(length, x, y, color) {
-  return <View
-    style={{
-      borderBottomColor: color,
-      borderBottomWidth: StyleSheet.hairlineWidth,
-      marginLeft: x,
-      marginTop: y,
-      width: length
-    }}
-  />;
-};
-
-/* function: goHome    workAround logo clicked -> homeScreen */
+/* function: goHome              workAround logo clicked -> homeScreen                */
 function goHome() { }
-
-/* function: goSettings    settings icon clicked -> settings page */
-const goSettings  = props => {
-  props.navigation.navigate('Settings')
- }
-
-/* function: goShare      share icon clicked -> share popup */
+/* function: goSettings          settings icon clicked -> settings page               */
+function goSettings() { }
+/* function: goShare             share icon clicked -> share popup                    */
 function goShare() { }
-
-/* function: goProfile      profile icon clicked -> profiles page */
+/* function: goProfile           profile icon clicked -> profiles page                */
 function goProfile() { }
-
 /* function: goNotification      notification bell icon clicked -> notification popup */
 function goNotification() { }
-
-/* function: goAdd      add icon clicked -> add event page/popup */
+/* function: goAdd               add icon clicked -> add event page/popup             */
 function goAdd() { }
 
 /* function: goOptions      add event clicked -> event page */
 function goOptions() {}
 
 
-/* function: renderGrid  -  times & lines placed
-  @params: item
-*/
-function renderGrid(item) {
-  const timeView = [];
-  const lineView = [];
-  const times = ["  8 am", "  9 am", "10 am", "11 am", "12 am", "  1 pm", "  2 pm", "  3 pm", "  4 pm", "  5 pm", "  6 pm", "  7 pm", "  8 pm", "  9 pm", "10 pm", "11 pm", "12 am",]
-  for (let i = 0; i <= 16; i += 1) {
-    timeView.push(<Text style={{ position: 'absolute', color: textColor, marginTop: i * heightPiece + 60 }}>{times[i]}</Text>);     //  write times
-    lineView.push(<View style={{ position: 'absolute' }}>{hLine(280, 50, i * heightPiece + 70, textColor, 1)}</View>)               //  draw horiz lines
-  }
-  {/* Style class view */ }
-  return <View>
-    {/* Style day-of-week text */}
-    <Text style={{ textAlign: "center", fontSize: 24, color: textColor }}>{item}</Text>
-    {/* Display both arrays */}
-    {timeView}{lineView}
-  </View>;
-};
-
-/* function: Listitem  -  creates each schedule widget
-  @params: item
-*/
-const Listitem = ({ item }) => {
-  return (
-    <View style={{
-      height: 1.5 * windowHeight,
-      width: windowWidth - 20,
-      // backgroundColor: "#EFEFEF",
-      borderRadius: 5,
-      marginRight: 20
-    }}>
-      {renderGrid(item)}
-    </View>
-  );
-};
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  calendar:{
+    height: windowHeight,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: primary,
+  },
+})
 
 export default function App() {
+  const [events, setEvents] = useState([
+    {
+      title: 'CS-108',
+      summary: 'SB 223',
+      start: '2022-11-05 08:30:00',
+      end: '2022-11-05 09:30:00',
+    },
+    {
+      title: 'MATH-171',
+      summary: 'NH 159',
+      start: '2022-11-05 11:00:00',
+      end: '2022-11-05 11:50:00',
+    },
+    {
+      title: 'ENGL-101',
+      summary: 'CFAC 242',
+      start: '2022-11-05 12:00:00',
+      end: '2022-11-05 12:50:00',
+    },
+    {
+      title: 'REL-121',
+      summary: 'HH 133',
+      start: '2022-11-05 14:00:00',
+      end: '2022-11-05 14:50:00',
+    },
+    {
+      title: 'CS-195',
+      summary: 'SB 010',
+      start: '2022-11-03 15:00:00',
+      end: '2022-11-03 15:50:00',
+    },
+  ]);
+
+  //On Click of event showing alert from here
+  const editEvent = (event) => {
+    alert("TODO: Add Edit for:\n\n" + (event.title) +"\n"+ (event.summary)
+          +"\nstart: "+ (event.start) +"\nend: "+ (event.end));
+  };
+
   return (
+    // homeScreen view of schedule + icons
     <View>
 
-      {/* Header Toolbar (with profile, notification bell, and logo) */}
+      {/* -----------------------------------------------------------------
+      START of Header Toolbar (with profile, notification bell, and logo) */}
       <View style={{ backgroundColor: "bgColor", height: .14 * windowHeight }}>
 
         {/* Profile Icon (top left)*/}
@@ -128,7 +131,6 @@ export default function App() {
           }} source={require('./Icons/notification.png')} />
         </TouchableOpacity>
 
-
         {/* workAround logo / home button */}
         <TouchableOpacity
           style={{ position: "absolute" }} onPress={goHome}>
@@ -141,46 +143,29 @@ export default function App() {
           }} source={require('./Icons/workAround.png')} />
         </TouchableOpacity>
       </View>
+      {/* END of Header Toolbar (with profile, notification bell, and logo)
+      ------------------------------------------------------------------- */}
 
-      {/* Schedule on homeScreen */}
-      <FlatList
-        style={{
-          borderVerticalColor: textColor,
-          borderTopWidth: 3,
-          borderBottomWidth: 3,
-          marginVerital: 5,
-          padding: 10,
-        }}
-        horizontal
-        data={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]}
-        renderItem={({ item }) => <View style={{ height: .75 * windowHeight }}>
 
-          {/* Settings Icon (bottom left)*/}
-          <TouchableOpacity onPress={goAdd}>
-            <Image style={{
-              height: 70,
-              width: 70,
-              position: "absolute",
-              top: .65 * windowHeight,
-              left: .78 * windowWidth,
-              backgroundColor: primary,
-              borderWidth: 6,
-              borderColor: "bgColor",
-              borderRadius: 100,
+      {/* ------------------------------
+      START of Schedule on homeScreen*/}
+       <View style={styles.calendar}>
+         <EventCalendar
+           eventTapped={editEvent}// Function on event press
+           events={events}           // Passing the Array of event
+           width={windowWidth}             // Container width
+           //number of dates rendered before & after initDate (def 30 before, 29 after)
+           size={60}                 //initDate defaulting to today
+           scrollToFirst             // Scroll to first event of the day (default true)
+         />
+       </View>
+       {/* END of Schedule on homeScreen
+        ------------------------------*/}
 
-            }} source={require('./Icons/add.png')} />
-          </TouchableOpacity>
 
-          <ScrollView>
-            <Listitem item={item} />
-          </ScrollView>
-        </View >}
+      {/* ----------------------------------------------
+      START of Footer Toolbar (with settings and share)*/}
 
-        showsHorizontalScrollIndicator={true}
-        showsVerticalScrollIndicator={true}
-      />
-
-      {/* Footer Toolbar (with settings and share) */}
       <View style={{ backgroundColor: "bgColor", height: .1 * windowHeight, width: windowWidth, position: "absolute", top: .95 * windowHeight }}>
 
         <NavigationContainer>
@@ -201,20 +186,37 @@ export default function App() {
             top: -3,
           }} source={require('./Icons/settings.png')} />
         </TouchableOpacity>
+      {/* Share Icon (bottom right)*/}
+      <TouchableOpacity onPress={goShare}>
+        <Image style={{
+          height: 35,
+          width: 35,
+          position: "absolute",
+          left: windowWidth - 70,
+        }} source={require('./Icons/share.png')} />
+      </TouchableOpacity>
+    </View>
+    {/* END of Footer Toolbar (with settings and share)
+    ------------------------------------------------ */}
 
-        {/* Share Icon (bottom right)*/}
-        <TouchableOpacity onPress={goShare}>
-          <Image style={{
-            height: 35,
-            width: 35,
-            position: "absolute",
-            left: windowWidth - 70,
-          }} source={require('./Icons/share.png')} />
-        </TouchableOpacity>
 
-      </View>
+    {/* Add Icon (bottom right on sched) */}
+    <TouchableOpacity onPress={goAdd}>
+      <Image style={{
+        // styling add-icon
+        height: 60,
+        width: 60,
+        opacity: .8,
+        backgroundColor: primary,
+        borderColor: "bgColor",
+        borderRadius: 50,
+
+        // positioning add-icon
+        position: "absolute",
+        left: windowWidth - 70,
+        bottom: 25,
+      }} source={require('./Icons/add.png')} />
+    </TouchableOpacity>
     </View>
   );
 }
-
-const styles = StyleSheet.create({});

@@ -6,8 +6,16 @@ const Delete= props => {
     return (
         <View style={styles.deleteBackground}>
             <View style={styles.square}>
-                <Text style={styles.buttonTitle}>Are you sure you want to delete MATH-255?</Text>
+                <Text style={styles.Title}>Are you sure you want to delete MATH-255?</Text>
+                <TouchableOpacity>
+                    <View style={styles.circle}>
+                    <Text style={styles.buttonTitle}>Delete</Text>
+                    </View>
+            </TouchableOpacity>
             </View>
+            <TouchableOpacity>
+                <Text style={styles.buttonTitle}>Cancel</Text>
+            </TouchableOpacity>
         </View>
         );
     }
@@ -21,25 +29,28 @@ const Delete= props => {
             justifyContent: 'center',
             alignItems: 'center',
         },
-        classTitle: {
-            fontSize: 35,
-            fontWeight: 'bold',
-            color: '#0000ff',
-            paddingHorizontal: 20,
-            paddingVertical: 30,
-            borderRadius: 20,
-            marginTop: 100,
-            textAlign: 'center',
-        },
         square: {
             backgroundColor: '#fff',
             padding: 15,
             borderRadius: 10,
             margin: 25,
         },
+        circle: {
+            backgroundColor: '#ffa500',
+            padding: 10,
+            borderRadius: 50,
+            margin: 25,
+        },
         buttonTitle: {
+            fontSize: 20,
+            color: '#fff',
+            textAlign: 'center',
+        },
+        Title: {
             fontSize: 30,
+            fontWeight: 'bold',
             color: '#000a',
             textAlign: 'center',
+            marginHorizontal: 50,
         }
       });
