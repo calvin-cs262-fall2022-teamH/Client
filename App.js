@@ -6,7 +6,7 @@
   - Braden Lint
   - Logan Humphrey
 */
-import { Image, StyleSheet, View, TouchableOpacity, Dimensions } from 'react-native';
+import { Image, StyleSheet, View, TouchableOpacity, Dimensions, NavigationContainer } from 'react-native';
 import EventCalendar from 'react-native-events-calendar';
 import React, {useState} from 'react';
 
@@ -17,6 +17,7 @@ let bgColor   = "white";      //  default background color  (white in LM) (black
 let textColor = "black";      //  default textcolor         (black in LM) (white in DM)
 const windowWidth = Dimensions.get('window').width;         //full height of screen
 const windowHeight = Dimensions.get('window').height;       //full width of screen
+const Stack = createStackNavigator();
 
 /* function: goHome              workAround logo clicked -> homeScreen                */
 function goHome() { }
@@ -30,7 +31,6 @@ function goProfile() { }
 function goNotification() { }
 /* function: goAdd               add icon clicked -> add event page/popup             */
 function goAdd() { }
-
 /* function: goOptions      add event clicked -> event page */
 function goOptions() {}
 
