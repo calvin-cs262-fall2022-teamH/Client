@@ -1,6 +1,5 @@
-import { Image, ScrollView, StyleSheet, Switch, Text, View, FlatList, TouchableOpacity, Button, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 
 const Delete= props => {
     return (

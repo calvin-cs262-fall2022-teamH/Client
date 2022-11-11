@@ -6,23 +6,17 @@
   - Braden Lint
   - Logan Humphrey
 */
-import { Animated, Image, StyleSheet, View, TouchableOpacity, Dimensions, Platform } from 'react-native';
-import EventCalendar from 'react-native-events-calendar';
 import React, { useState } from 'react';
+import { Animated, Image, StyleSheet, View, TouchableOpacity, Dimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import SettingsScreen from './screens/Settings';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useRef } from 'react';
-import React, {useState} from 'react';
-import { Image, StyleSheet, View, TouchableOpacity, Dimensions, Settings } from 'react-native';
+import SettingsScreen from './screens/Settings';
 import EventCalendar from 'react-native-events-calendar';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Delete from './screens/delete';
-import SettingsScreen from './screens/settings';
+
 
 
 /*  A space to declare global variables */
@@ -51,10 +45,6 @@ function goNotification() { }
 function goAdd() { }
 /* function: goOptions      add event clicked -> event page */
 function goOptions() { }
-
-
-
-
 
 
 const styles = StyleSheet.create({
@@ -188,15 +178,12 @@ function HomeScreen({ navigation }) {
 
       <View style={{ backgroundColor: "bgColor", height: .1 * windowHeight, width: windowWidth, position: "absolute", top: .95 * windowHeight }}>
 
-
-
-        <NavigationContainer>
+        {/* <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="Settings" component={SettingsScreen} />
-
             <Stack.Screen name="Delete" component={Delete} />
           </Stack.Navigator>
-        </NavigationContainer>
+        </NavigationContainer> */}
 
         {/* Settings Icon (bottom left)*/}
         <TouchableOpacity onPress={() => goSettings(props)}>
@@ -245,17 +232,12 @@ function HomeScreen({ navigation }) {
 }
 
 
-//Main Function
-
-const Stack = createNativeStackNavigator();
-
 function App() {
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Home"
-        tabBarOptions={{
+      <Tab.Navigator  initialRouteName="Home"
+        screenOptions={{
           showLabel: false,
           // Floating Tab Bar...
           style: {
@@ -284,7 +266,7 @@ function App() {
               <View style={{
                 // centring Tab Button...
                 position: 'absolute',
-                top: 20
+                bottom: 3
               }}>
                 <FontAwesome5
                   name="home"
@@ -307,9 +289,8 @@ function App() {
           options={{
             tabBarIcon: ({ focused }) => (
               <View style={{
-                // centring Tab Button...
-                position: 'absolute',
-                top: 20
+                position: 'absolute', // centring Tab Button...
+                bottom:3
               }}>
                 <FontAwesome5
                   name="user-alt"
@@ -350,13 +331,8 @@ function App() {
 
 function getWidth() {
   let width = Dimensions.get("window").width
-
-  // Horizontal Padding = 20...
-  width = width - 80
-
-  // Total five Tabs...
-  return width / 5
+  width = width - 80  // Horizontal Padding = 20...
+  return width / 5    // Total five Tabs..
 }
-
 
 export default App;
