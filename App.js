@@ -13,9 +13,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useRef } from 'react';
-import SettingsScreen from './screens/Settings';
+import SettingsScreen from '../screens/Settings';
 import EventCalendar from 'react-native-events-calendar';
 import Delete from './screens/delete';
+
 
 
 
@@ -109,7 +110,7 @@ function Header() {
 
 
 
-
+{/* HOME SCREEN FUNCTION */ }
 function HomeScreen({ navigation }) {
   let primary = "#F38C00";    //  default primary color     (orange)
   let secondary = "#0167AB";    //  default secondary color   (blue)
@@ -173,42 +174,6 @@ function HomeScreen({ navigation }) {
         ------------------------------*/}
 
 
-      {/* ----------------------------------------------
-      START of Footer Toolbar (with settings and share)*/}
-
-      <View style={{ backgroundColor: "bgColor", height: .1 * windowHeight, width: windowWidth, position: "absolute", top: .95 * windowHeight }}>
-
-        {/* <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="Settings" component={SettingsScreen} />
-            <Stack.Screen name="Delete" component={Delete} />
-          </Stack.Navigator>
-        </NavigationContainer> */}
-
-        {/* Settings Icon (bottom left)*/}
-        <TouchableOpacity onPress={() => goSettings(props)}>
-          <Image style={{
-            height: 45,
-            width: 45,
-            position: "absolute",
-            right: windowWidth - 70,
-            top: -3,
-          }} source={require('./Icons/settings.png')} />
-        </TouchableOpacity>
-        {/* Share Icon (bottom right)*/}
-        <TouchableOpacity onPress={goShare}>
-          <Image style={{
-            height: 35,
-            width: 35,
-            position: "absolute",
-            left: windowWidth - 70,
-          }} source={require('./Icons/share.png')} />
-        </TouchableOpacity>
-      </View>
-      {/* END of Footer Toolbar (with settings and share)
-    ------------------------------------------------ */}
-
-
       {/* Add Icon (bottom right on sched) */}
       <TouchableOpacity onPress={goAdd}>
         <Image style={{
@@ -236,7 +201,7 @@ function App() {
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
   return (
     <NavigationContainer>
-      <Tab.Navigator  initialRouteName="Home"
+      <Tab.Navigator initialRouteName="Home"
         screenOptions={{
           showLabel: false,
           // Floating Tab Bar...
@@ -271,7 +236,7 @@ function App() {
                 <FontAwesome5
                   name="home"
                   size={20}
-                  color={focused ? 'red' : 'gray'}
+                  color={focused ? 'blue' : 'gray'}
                 ></FontAwesome5>
               </View>
             )
@@ -290,12 +255,12 @@ function App() {
             tabBarIcon: ({ focused }) => (
               <View style={{
                 position: 'absolute', // centring Tab Button...
-                bottom:3
+                bottom: 3
               }}>
                 <FontAwesome5
                   name="user-alt"
                   size={20}
-                  color={focused ? 'red' : 'gray'}
+                  color={focused ? 'blue' : 'gray'}
                 ></FontAwesome5>
               </View>
             )
@@ -308,6 +273,53 @@ function App() {
               }).start();
             }
           })}></Tab.Screen>
+
+        <Tab.Screen name="" component={SettingsScreen}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <View style={{
+                position: 'absolute', // centring Tab Button...
+                bottom: 3
+              }}>
+                <FontAwesome5
+                  name="user-alt"
+                  size={20}
+                  color={focused ? 'blue' : 'gray'}
+                ></FontAwesome5>
+              </View>
+            )
+          }} listeners={({ navigation, route }) => ({
+            // Onpress Update....
+            tabPress: e => {
+              Animated.spring(tabOffsetValue, {
+                toValue: getWidth() * 4,
+                useNativeDriver: true
+              }).start();
+            }
+          })}></Tab.Screen>
+
+        <Tab.Screen name={"Add a Class"} component={AddScreen} options={{
+          tabBarIcon: ({ focused }) => (
+
+            <TouchableOpacity>
+              <View style={{
+                width: 55,
+                height: 55,
+                backgroundColor: 'orange',
+                borderRadius: 30,
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginBottom: Platform.OS == "android" ? 50 : 30
+              }}>
+                <Image source={require('./Icons/add.png')} style={{
+                  width: 22,
+                  height: 22,
+                  tintColor: 'white',
+                }}></Image>
+              </View>
+            </TouchableOpacity>
+          )
+        }} />
       </Tab.Navigator>
 
       <Animated.View style={{
