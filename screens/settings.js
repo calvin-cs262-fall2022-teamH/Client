@@ -1,11 +1,14 @@
-import { Image, StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { Image, ScrollView, StyleSheet, Switch, Text, View, FlatList, TouchableOpacity, Dimensions } from 'react-native';
+import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ToggleSwitch from 'toggle-switch-react-native';
 
 
-let primary = "#F38C00";       //  default primary color     (orange)
-let secondary = "#0167AB";     //  default secondary color   (blue)
-let bgColor = "white";         //  default background color  (white in LM) (black in DM)
-let textColor = "black";       //  default textcolor         (black in LM) (white in DM)
+let primary = "#F38C00";    //  default primary color     (orange)
+let secondary = "#0167AB";    //  default secondary color   (blue)
+let bgColor = "white";      //  default background color  (white in LM) (black in DM)
+let textColor = "black";      //  default textcolor         (black in LM) (white in DM)
 const windowWidth = Dimensions.get('window').width;         //full height of screen
 const windowHeight = Dimensions.get('window').height;
 export default function SettingsScreen({ route, navigation }) {
