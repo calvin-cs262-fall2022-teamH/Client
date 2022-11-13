@@ -16,7 +16,10 @@
   - Braden Lint
   - Logan Humphrey
 */
+
+import React, { useState } from "react";
 import {
+  Animated,
   Image,
   StyleSheet,
   View,
@@ -28,6 +31,17 @@ import EventCalendar from "react-native-events-calendar";
 import Delete from "./screens/delete";
 
 /*  A space to declare App.js variables */
+} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { useRef } from "react";
+import SettingsScreen from "./screens/Settings";
+import EventCalendar from "react-native-events-calendar";
+import Delete from "./screens/delete";
+
+/*  A space to declare global variables */
 let primary = "#F38C00"; //  default primary color     (orange)
 let secondary = "#0167AB"; //  default secondary color   (blue)
 let bgColor = "white"; //  default background color  (white in LM) (black in DM)
@@ -42,6 +56,7 @@ const Tab = createBottomTabNavigator();
  * - to be used for each icon to be clicked & redirect
  * to according pages. (e.g. Add button -> Add Page)
  */
+
 /* function: goHome              workAround logo clicked -> homeScreen                */
 function goHome() {}
 /* function: goSettings          settings icon clicked -> settings page               */
@@ -253,6 +268,7 @@ function HomeScreen({ navigation }) {
           style={{
             // styling add-icon
             height: 60,
+            height: 10,
             width: 60,
             opacity: 0.8,
             backgroundColor: primary,
