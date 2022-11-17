@@ -1,6 +1,6 @@
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
-import { NavigationContainer } from '@react-navigation';
+
 
 const NavigateToEdit = props => {
     props.navigation.navigate('Edit')

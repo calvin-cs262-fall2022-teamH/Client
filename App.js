@@ -6,20 +6,6 @@
   - Braden Lint
   - Logan Humphrey
 */
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import { Animated, Image, StyleSheet, View, TouchableOpacity, Dimensions } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { useRef } from 'react';
-import SettingsScreen from '../screens/Settings';
-import EventCalendar from 'react-native-events-calendar';
-import Delete from './screens/delete';
-
-
-=======
 import React, { useState } from "react";
 import {
   Animated,
@@ -28,16 +14,23 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
+  Platform
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useRef } from "react";
-import SettingsScreen from "./screens/Settings";
 import EventCalendar from "react-native-events-calendar";
+import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler';
+//Importing all Screens Needed
+import SettingsScreen from "./screens/settings";
+import ProfileScreen from "./screens/profile";
+import AddScreen from "./screens/add";
+import Options from "./screens/options";
 import Delete from "./screens/delete";
->>>>>>> 552d6234e5050a4b5a1f014c7e13f8c59d08ed85
+import EditScreen from "./screens/Edit";
 
 
 /*  A space to declare global variables */
@@ -52,19 +45,23 @@ const Stack = createNativeStackNavigator(); //stack declaration
 const Tab = createBottomTabNavigator();
 
 /* function: goHome              workAround logo clicked -> homeScreen                */
-function goHome() {}
+function goHome() { }
 /* function: goSettings          settings icon clicked -> settings page               */
-function goSettings() {}
+function goSettings() { }
 /* function: goShare             share icon clicked -> share popup                    */
-function goShare() {}
+function goShare() { }
 /* function: goProfile           profile icon clicked -> profiles page                */
-function goProfile() {}
+function goProfile() { }
 /* function: goNotification      notification bell icon clicked -> notification popup */
-function goNotification() {}
+function goNotification() {
+  alert(
+    "Your Notifications are now turned off"
+  );
+}
 /* function: goAdd               add icon clicked -> add event page/popup             */
-function goAdd() {}
+function goAdd() { }
 /* function: goOptions      add event clicked -> event page */
-function goOptions() {}
+function goOptions() { }
 
 const styles = StyleSheet.create({
   container: {
@@ -87,57 +84,25 @@ function Header() {
       {/* -----------------------------------------------------------------
       START of Header Toolbar (with profile, notification bell, and logo) */}
       <View style={{ flex: 1, flexDirection: "row", flexWrap: "wrap" }}>
-        {/* Profile Icon (top left)*/}
-        <TouchableOpacity onPress={goProfile}>
-          <Image
-            style={{
-              height: 35,
-              width: 35,
-              left: -130,
-              top: -20,
-            }}
-            source={require("./Icons/profile.png")}
-          />
-        </TouchableOpacity>
-
-        {/* Notifcation Icon (top left)*/}
-        <TouchableOpacity onPress={goNotification}>
-          <Image
-            style={{
-              height: 35,
-              width: 35,
-              left: -100,
-              top: -20,
-            }}
-            source={require("./Icons/notification.png")}
-          />
-        </TouchableOpacity>
 
         {/* workAround logo / home button */}
-        <TouchableOpacity style={{ position: "absolute" }} onPress={goHome}>
-          <Image
-            style={{
-              height: 80,
-              width: 150,
-              left: 70,
-              top: -50,
-            }}
-            source={require("./Icons/workAround.png")}
-          />
+        <TouchableOpacity
+          style={{ position: "absolute" }} onPress={goHome}>
+          <Image style={{
+            height: 85,
+            width: 160,
+            left: 40,
+            top: -50,
+          }} source={require('./Icons/workAround.png')} />
         </TouchableOpacity>
       </View>
     </View>
   );
-<<<<<<< HEAD
 };
 
 
 
 {/* HOME SCREEN FUNCTION */ }
-=======
-}
-
->>>>>>> 552d6234e5050a4b5a1f014c7e13f8c59d08ed85
 function HomeScreen({ navigation }) {
   let primary = "#F38C00"; //  default primary color     (orange)
   let secondary = "#0167AB"; //  default secondary color   (blue)
@@ -180,16 +145,7 @@ function HomeScreen({ navigation }) {
 
   //On Click of event showing alert from here
   const editEvent = (event) => {
-    alert(
-      "TODO: Add Edit for:\n\n" +
-        event.title +
-        "\n" +
-        event.summary +
-        "\nstart: " +
-        event.start +
-        "\nend: " +
-        event.end
-    );
+    navigation.navigate('Edit')
   };
 
   return (
@@ -207,264 +163,163 @@ function HomeScreen({ navigation }) {
       </View>
       {/* END of Schedule on homeScreen
         ------------------------------*/}
-
-<<<<<<< HEAD
-=======
-      {/* ----------------------------------------------
-      START of Footer Toolbar (with settings and share)*/}
-
-      <View
-        style={{
-          backgroundColor: "bgColor",
-          height: 0.1 * windowHeight,
-          width: windowWidth,
-          position: "absolute",
-          top: 0.95 * windowHeight,
-        }}
-      >
-        {/* <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="Settings" component={SettingsScreen} />
-            <Stack.Screen name="Delete" component={Delete} />
-          </Stack.Navigator>
-        </NavigationContainer> */}
-
-        {/* Settings Icon (bottom left)*/}
-        <TouchableOpacity onPress={() => goSettings(props)}>
-          <Image
-            style={{
-              height: 45,
-              width: 45,
-              position: "absolute",
-              right: windowWidth - 70,
-              top: -3,
-            }}
-            source={require("./Icons/settings.png")}
-          />
-        </TouchableOpacity>
-        {/* Share Icon (bottom right)*/}
-        <TouchableOpacity onPress={goShare}>
-          <Image
-            style={{
-              height: 35,
-              width: 35,
-              position: "absolute",
-              left: windowWidth - 70,
-            }}
-            source={require("./Icons/share.png")}
-          />
-        </TouchableOpacity>
-      </View>
-      {/* END of Footer Toolbar (with settings and share)
-    ------------------------------------------------ */}
->>>>>>> 552d6234e5050a4b5a1f014c7e13f8c59d08ed85
-
-      {/* Add Icon (bottom right on sched) */}
-      <TouchableOpacity onPress={goAdd}>
-        <Image
-          style={{
-            // styling add-icon
-            height: 10,
-            width: 60,
-            opacity: 0.8,
-            backgroundColor: primary,
-            borderColor: "bgColor",
-            borderRadius: 50,
-
-            // positioning add-icon
-            position: "absolute",
-            left: windowWidth - 70,
-            bottom: 25,
-          }}
-          source={require("./Icons/add.png")}
-        />
-      </TouchableOpacity>
     </View>
   );
 }
+
+//Home Screen Stack- Home Screen that takes you to options
+const HomeStack = createNativeStackNavigator();
+
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Schedule" component={HomeScreen} options={{
+        headerShown: false
+      }} />
+      <HomeStack.Screen name="Edit" component={EditScreen}
+        options={{
+          headerShown: false
+        }}
+      />
+    </HomeStack.Navigator>
+  );
+};
+
+
+
 
 function App() {
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
   return (
     <NavigationContainer>
-<<<<<<< HEAD
-      <Tab.Navigator initialRouteName="Home"
-=======
       <Tab.Navigator
         initialRouteName="Home"
->>>>>>> 552d6234e5050a4b5a1f014c7e13f8c59d08ed85
-        screenOptions={{
+        tabBarOptions={{
           showLabel: false,
+          showIcon: true,
           // Floating Tab Bar...
           style: {
-            backgroundColor: "white",
-            position: "absolute",
+            backgroundColor: 'white',
+            position: 'absolute',
             bottom: 40,
             marginHorizontal: 20,
             // Max Height...
             height: 60,
             borderRadius: 10,
             // Shadow...
-            shadowColor: "#000",
+            shadowColor: '#000',
             shadowOpacity: 0.06,
             shadowOffset: {
               width: 10,
-              height: 10,
+              height: 10
             },
             paddingHorizontal: 20,
-          },
+          }
         }}
+
       >
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            headerTitle: () => <Header />,
-            tabBarIcon: ({ focused }) => (
-              <View
-                style={{
-                  // centring Tab Button...
-                  position: "absolute",
-                  bottom: 3,
-                }}
-              >
-                <FontAwesome5
-                  name="home"
-                  size={20}
-<<<<<<< HEAD
-                  color={focused ? 'blue' : 'gray'}
-=======
-                  color={focused ? "red" : "gray"}
->>>>>>> 552d6234e5050a4b5a1f014c7e13f8c59d08ed85
-                ></FontAwesome5>
-              </View>
-            ),
-          }}
-          listeners={({ navigation, route }) => ({
-            // Onpress Update....
-            tabPress: (e) => {
-              Animated.spring(tabOffsetValue, {
-                toValue: 0,
-                useNativeDriver: true,
-              }).start();
-            },
-          })}
-        />
-        <Tab.Screen
-          name="Settings"
-          component={SettingsScreen}
-          options={{
-            tabBarIcon: ({ focused }) => (
-<<<<<<< HEAD
-              <View style={{
-                position: 'absolute', // centring Tab Button...
-                bottom: 3
-              }}>
-                <FontAwesome5
-                  name="user-alt"
-                  size={20}
-                  color={focused ? 'blue' : 'gray'}
-=======
-              <View
-                style={{
-                  position: "absolute", // centring Tab Button...
-                  bottom: 3,
-                }}
-              >
-                <FontAwesome5
-                  name="user-alt"
-                  size={20}
-                  color={focused ? "red" : "gray"}
->>>>>>> 552d6234e5050a4b5a1f014c7e13f8c59d08ed85
-                ></FontAwesome5>
-              </View>
-            ),
-          }}
-          listeners={({ navigation, route }) => ({
-            // Onpress Update....
-            tabPress: (e) => {
-              Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 4,
-                useNativeDriver: true,
-              }).start();
-<<<<<<< HEAD
-            }
-          })}></Tab.Screen>
 
-        <Tab.Screen name="" component={SettingsScreen}
-          options={{
-            tabBarIcon: ({ focused }) => (
-              <View style={{
-                position: 'absolute', // centring Tab Button...
-                bottom: 3
-              }}>
-                <FontAwesome5
-                  name="user-alt"
-                  size={20}
-                  color={focused ? 'blue' : 'gray'}
-                ></FontAwesome5>
-              </View>
-            )
-          }} listeners={({ navigation, route }) => ({
-            // Onpress Update....
-            tabPress: e => {
-              Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 4,
-                useNativeDriver: true
-              }).start();
-            }
-          })}></Tab.Screen>
-
-        <Tab.Screen name={"Add a Class"} component={AddScreen} options={{
+        {/*Home Screen Tab*/}
+        <Tab.Screen name="Home" component={HomeStackScreen} options={{
+          headerTitle: () => <Header />,
           tabBarIcon: ({ focused }) => (
-
-            <TouchableOpacity>
-              <View style={{
-                width: 55,
-                height: 55,
-                backgroundColor: 'orange',
-                borderRadius: 30,
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginBottom: Platform.OS == "android" ? 50 : 30
-              }}>
-                <Image source={require('./Icons/add.png')} style={{
-                  width: 22,
-                  height: 22,
-                  tintColor: 'white',
-                }}></Image>
-              </View>
-            </TouchableOpacity>
+            <View style={{
+              // centring Tab Button...
+              position: 'absolute',
+              top: 20
+            }} >
+              <FontAwesome5
+                name="home"
+                size={30}
+                color={focused ? 'blue' : 'gray'}
+              ></FontAwesome5>
+            </View>
           )
         }} />
-=======
-            },
-          })}
-        ></Tab.Screen>
->>>>>>> 552d6234e5050a4b5a1f014c7e13f8c59d08ed85
-      </Tab.Navigator>
 
-      <Animated.View
-        style={{
-          width: getWidth() - 20,
-          height: 2,
-          backgroundColor: "red",
-          position: "absolute",
-          bottom: 98,
-          // Horizontal Padding = 20...
-          left: 50,
-          borderRadius: 20,
-          transform: [{ translateX: tabOffsetValue }],
-        }}
-      ></Animated.View>
-    </NavigationContainer>
+
+        {/*Settings Screen Tab*/}
+        <Tab.Screen name={"Settings"} component={SettingsScreen} options={{
+          tabBarIcon: ({ focused }) => (
+            <View style={{
+              // centring Tab Button...
+              position: 'absolute',
+              top: 20
+            }}>
+              <FontAwesome5
+                name="cog"
+                size={30}
+                color={focused ? 'blue' : 'gray'}
+              ></FontAwesome5>
+            </View>
+          )
+        }} />
+
+        <Tab.Screen name={"Add a Class"} component={AddScreen} options={{
+          headerTitle: () => <Header />,
+          tabBarIcon: () => (
+            <View style={{
+              width: 55,
+              height: 55,
+              backgroundColor: 'orange',
+              borderRadius: 35,
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: Platform.OS == "android" ? 50 : 30
+            }}>
+              <Image source={require('./Icons/add.png')} style={{
+                width: 22,
+                height: 22,
+                tintColor: 'white',
+              }}></Image>
+            </View>
+          )
+        }}></Tab.Screen>
+
+        {/*Profile Screen Tab*/}
+        <Tab.Screen name={"Profile"} component={ProfileScreen} options={{
+          tabBarIcon: ({ focused }) => (
+            <View style={{
+              // centring Tab Button...
+              position: 'absolute',
+              top: 20
+            }}>
+              <FontAwesome5
+                name="user-alt"
+                size={30}
+                color={focused ? 'blue' : 'gray'}
+              ></FontAwesome5>
+            </View>
+          )
+        }} ></Tab.Screen>
+
+        <Tab.Screen name={"Notifications"} component={EditScreen} options={{
+          tabBarIcon: ({ focused }) => (
+            <View style={{
+              // centring Tab Button...
+              position: 'absolute',
+              top: 20
+            }}>
+              <FontAwesome5
+                name="bell"
+                size={30}
+                color={focused ? 'blue' : 'gray'}
+              ></FontAwesome5>
+            </View>
+          )
+        }} />
+      </Tab.Navigator>
+    </NavigationContainer >
+
   );
 }
 
 function getWidth() {
   let width = Dimensions.get("window").width;
   width = width - 80; // Horizontal Padding = 20...
-  return width / 5; // Total five Tabs..
+  return width / 5; // Total five Tabs...
 }
+
+
 
 export default App;
