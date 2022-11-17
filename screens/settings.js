@@ -1,9 +1,26 @@
+import React, { useState } from "react";
+import {
+    Animated,
+    Image,
+    StyleSheet,
+    View,
+    TouchableOpacity,
+    Dimensions,
+    Platform,
+    Appearance,
+    Switch,
+    Button,
+    Text
+} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { useRef } from "react";
+import EventCalendar from "react-native-events-calendar";
 import { StatusBar } from 'expo-status-bar';
-import { Image, ScrollView, StyleSheet, Switch, Text, View, FlatList, TouchableOpacity, Dimensions } from 'react-native';
-import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ToggleSwitch from 'toggle-switch-react-native';
-
+import 'react-native-gesture-handler';
+import EventRegister from 'react-native-event-listeners';
 
 let primary = "#F38C00";    //  default primary color     (orange)
 let secondary = "#0167AB";    //  default secondary color   (blue)
@@ -11,85 +28,22 @@ let bgColor = "white";      //  default background color  (white in LM) (black i
 let textColor = "black";      //  default textcolor         (black in LM) (white in DM)
 const windowWidth = Dimensions.get('window').width;         //full height of screen
 const windowHeight = Dimensions.get('window').height;
+
+const [theme, setTheme] = useState(false);
+
+
 export default function SettingsScreen({ route, navigation }) {
-    //State for dark mode switch
-    state = {
-        isOnBlueToggleSwitch: false
-    };
-    //Function for togggle
-    function onToggle(isOn) { }
-
     return (
-
-
-        <View>
-
-            {/*Actual Page*/}
-            <View>
-                <Image style={{
-                    height: 43,
-                    width: 43,
-                    position: "center",
-                    right: windowWidth - 70,
-                    top: -3,
-                }} source={require('../Icons/settings.png')} />
-
-                <Text
-                    style={{ color: '#0167AB', fontFamily: 'Inter', fontSize: 40, fontStyle: 'bold' }}
-                >
-                    Settings
-                </Text>
-            </View>
-            <View style={styles.item}>
-                <View style={styles.itemLeft}>
-                    <ToggleSwitch
-                        label="Light Mode"
-                        onColor="#2196F3"
-                        isOn={this.state.isOnBlueToggleSwitch}
-                        onToggle={isOnBlueToggleSwitch => {
-                            this.setState({ isOnBlueToggleSwitch });
-                            this.onToggle(isOnBlueToggleSwitch);
-                        }}
-                    />
-                </View>
-            </View>
-            <View>
-                <Text
-                    style={{ color: '000000', fontFamily: 'Inter', fontSize: 30, fontStyle: 'bold' }}
-                >
-                    Colors:
-                </Text>
-            </View>
-            {/* primary color */}
-            <View style={styles.item}>
-                <View style={styles.itemLeft}>
-                    <TouchableOpacity style={styles.circular1} onPress={() => navigation.navigate('Colors')} ></TouchableOpacity>
-                    <Text>Primary Color</Text>
-                </View>
-            </View>
-            {/* secondary color */}
-            <View style={styles.item}>
-                <View style={styles.itemLeft}>
-                    <TouchableOpacity style={styles.circular2} onPress={() => navigation.navigate('Colors')} ></TouchableOpacity>
-                    <Text>Secondary Color</Text>
-                </View>
-            </View>
-            {/*event color*/}
-            <View style={styles.item}>
-                <View style={styles.itemLeft}>
-                    <TouchableOpacity style={styles.circular3} onPress={() => navigation.navigate('Colors')}></TouchableOpacity>
-                    <Text>Secondary Color</Text>
-                </View>
-            </View>
-
-
-
-
+        <View style={styles.item}>
+            <Text>Dark Theme</Text>
+            <Switch value={theme} onValueChange={() => {
+                setTheme((value) => !value)
+            }} />
         </View>
-
 
     )
 }
+
 const styles = StyleSheet.create({
     item: {
         backgroundColor: '#FFF',
@@ -99,27 +53,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginBottom: 20,
-    },
-    circular1: {
-        width: 12,
-        height: 12,
-        borderColor: 'F38C00',
-        borderWidth: 2,
-        borderRadius: 5,
-    },
-    circular2: {
-        width: 12,
-        height: 12,
-        borderColor: '0167AB',
-        borderWidth: 2,
-        borderRadius: 5,
-    },
-    circular2: {
-        width: 12,
-        height: 12,
-        borderColor: 'F3F3F3',
-        borderWidth: 2,
-        borderRadius: 5,
-    },
-
-});
+    }
+})

@@ -6,7 +6,7 @@
   - Braden Lint
   - Logan Humphrey
 */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Animated,
   Image,
@@ -24,6 +24,7 @@ import { useRef } from "react";
 import EventCalendar from "react-native-events-calendar";
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
+import EventRegister from 'react-native-event-listeners';
 //Importing all Screens Needed
 import SettingsScreen from "./screens/settings";
 import ProfileScreen from "./screens/profile";
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
     backgroundColor: primary,
   },
 });
+
 
 //Header Function
 function Header() {
@@ -189,6 +191,22 @@ function HomeStackScreen() {
 
 
 function App() {
+
+  {/*State For Theme Change Across The App*/ }
+  const [theme, setTheme] = useState(false);
+
+  useEffect(() => {
+    let eventListener = EventRegister.addEventListener(
+      "changeTheme",
+      (data) => {
+        setTheme(data);
+      }
+    );
+    return () => {
+      EventRegister.removeEventListner(eventListener);
+    };
+  });
+
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
   return (
     <NavigationContainer>
