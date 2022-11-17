@@ -25,17 +25,13 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
-  NavigationContainer,
 } from "react-native";
 import EventCalendar from "react-native-events-calendar";
-import Delete from "./screens/delete";
-} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useRef } from "react";
-import EventCalendar from "react-native-events-calendar";
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
 //Importing all Screens Needed
@@ -78,8 +74,8 @@ function goNotification() {
   );
 }
 /* function: goAdd               add icon clicked -> add event page/popup             */
-function goAdd() { }           
-function goOptions() {}
+function goAdd() { }
+function goOptions() { }
 
 const styles = StyleSheet.create({
   container: {
@@ -210,21 +206,6 @@ function HomeStackScreen() {
     </HomeStack.Navigator>
   );
 };
-
-
-
-      {/* Add Icon (bottom right on sched) */}
-      <TouchableOpacity onPress={goAdd}>
-        <Image
-          style={{
-            // styling add-icon
-            height: 60,
-            height: 10,
-            width: 60,
-            opacity: 0.8,
-            backgroundColor: primary,
-            borderColor: "bgColor",
-            borderRadius: 50,
 
 
 function App() {
