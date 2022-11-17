@@ -17,6 +17,79 @@ const EditScreen = (props) => {
   const [Thu, setThu] = useState(false);
   const [Fri, setFri] = useState(false);
   const [Sat, setSat] = useState(false);
+
+  return (
+    <View style={styles.EditBackground}>
+      <Text style={styles.EditTitle}>Math-255</Text>
+      <Text style={styles.InfoText}>Event Name and Instructor:</Text>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.writeTaskWrapper}
+      >
+        <TextInput style={styles.input} placeholder={"Event Name"} />
+      </KeyboardAvoidingView>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.writeTaskWrapper}
+      >
+        <TextInput style={styles.input} placeholder={"Instructor (optional)"} />
+      </KeyboardAvoidingView>
+      <Text style={styles.InfoText}>Location:</Text>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.writeTaskWrapper}
+      >
+        <TextInput style={styles.input} placeholder={"Location (optional)"} />
+      </KeyboardAvoidingView>
+      /** Checkboxes: select which days to display */
+      <Checkbox
+        style={styles.Checkbox}
+        title="S"
+        onPress={() => setSun(!Sun)}
+        isChecked={Sun}
+      />
+      <Checkbox
+        style={styles.Checkbox}
+        title="M"
+        onPress={() => setMon(!Mon)}
+        isChecked={Mon}
+      />
+      <Checkbox
+        style={styles.Checkbox}
+        title="T"
+        onPress={() => setTue(!Tue)}
+        isChecked={Tue}
+      />
+      <Checkbox
+        style={styles.Checkbox}
+        title="W"
+        onPress={() => setWed(!Wed)}
+        isChecked={Wed}
+      />
+      <Checkbox
+        style={styles.Checkbox}
+        title="TH"
+        onPress={() => setThu(!Thu)}
+        isChecked={Thu}
+      />
+      <Checkbox
+        style={styles.Checkbox}
+        title="F"
+        onPress={() => setFri(!Fri)}
+        isChecked={Fri}
+      />
+      <Checkbox
+        style={styles.Checkbox}
+        title="S"
+        onPress={() => setSat(!Sat)}
+        isChecked={Sat}
+      />
+    </View>
+  );
+};
+
+export default Edit;
+
   return (
     <View style={styles.EditBackground}>
       <Text style={styles.EditTitle}>Math-255</Text>

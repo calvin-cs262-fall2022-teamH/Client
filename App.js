@@ -1,11 +1,22 @@
 /*  WorkAround App.js
 
+    desc: Should serve as a home screen for entire app.
+    Will have navigation to Settings.js, Edit.js, &
+    Add.js.
+
+    Main components:
+    - header with User Icon, Notification Bell, & Logo
+    - schedule window with events repeating on proper days,
+    as well as an add icon bottom right of schedule.
+    - footer with Settings Icon & Share Icon (and maybe home)
+
   Programmed by:
   - Tanvi Kulkarni
   - Connor Broekhuizen
   - Braden Lint
   - Logan Humphrey
 */
+
 import React, { useState } from "react";
 import {
   Animated,
@@ -14,7 +25,10 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
-  Platform
+  NavigationContainer,
+} from "react-native";
+import EventCalendar from "react-native-events-calendar";
+import Delete from "./screens/delete";
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -41,8 +55,13 @@ let textColor = "black"; //  default textcolor         (black in LM) (white in D
 const windowWidth = Dimensions.get("window").width; //full height of screen
 const windowHeight = Dimensions.get("window").height; //full width of screen
 const Stack = createNativeStackNavigator(); //stack declaration
-
 const Tab = createBottomTabNavigator();
+
+/**
+ * A block of function declarations for future use:
+ * - to be used for each icon to be clicked & redirect
+ * to according pages. (e.g. Add button -> Add Page)
+ */
 
 /* function: goHome              workAround logo clicked -> homeScreen                */
 function goHome() { }
@@ -59,9 +78,8 @@ function goNotification() {
   );
 }
 /* function: goAdd               add icon clicked -> add event page/popup             */
-function goAdd() { }
-/* function: goOptions      add event clicked -> event page */
-function goOptions() { }
+function goAdd() { }           
+function goOptions() {}
 
 const styles = StyleSheet.create({
   container: {
@@ -101,8 +119,16 @@ function Header() {
 };
 
 
-
 {/* HOME SCREEN FUNCTION */ }
+
+/**
+ * HomeScreen function
+ * @param {*} param0
+ * @returns GUI outputted with:
+ *  - workAround logo
+ *  - schedule with events
+ *  - share & settings icons
+ */
 function HomeScreen({ navigation }) {
   let primary = "#F38C00"; //  default primary color     (orange)
   let secondary = "#0167AB"; //  default secondary color   (blue)
@@ -186,6 +212,19 @@ function HomeStackScreen() {
 };
 
 
+
+      {/* Add Icon (bottom right on sched) */}
+      <TouchableOpacity onPress={goAdd}>
+        <Image
+          style={{
+            // styling add-icon
+            height: 60,
+            height: 10,
+            width: 60,
+            opacity: 0.8,
+            backgroundColor: primary,
+            borderColor: "bgColor",
+            borderRadius: 50,
 
 
 function App() {
