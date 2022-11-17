@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import Checkbox from "../Components/Checkbox";
 
-const Edit = (props) => {
+const EditScreen = (props) => {
   const [Sun, setSun] = useState(false);
   const [Mon, setMon] = useState(false);
   const [Tue, setTue] = useState(false);
@@ -165,7 +165,7 @@ export default Edit;
   );
 };
 
-export default Edit;
+export default EditScreen;
 
 const styles = StyleSheet.create({
   EditBackground: {
