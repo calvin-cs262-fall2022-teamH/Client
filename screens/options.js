@@ -1,6 +1,6 @@
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+
 
 const NavigateToEdit = props => {
     props.navigation.navigate('Edit')
@@ -12,29 +12,29 @@ const NavigateToDelete = props => {
     props.navigation.navigate('Delete')
 }
 
-const Options= props => {
+const Options = props => {
     return (
-      <View style={styles}>
-        <Text style={styles.classTitle}>Math-255</Text>
-        <TouchableOpacity onPress={() => NavigateToEdit(props)}>
-            <View style={styles.square}>
-                <Text style={styles.buttonTitle}>Edit</Text>
-            </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => NavigateToSilence(props)}>
-            <View style={styles.square}>
-                <Text style={styles.buttonTitle}>Silence</Text>
-            </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => NavigateToDelete(props)}>
-            <View style={styles.square}>
-                <Text style={styles.buttonTitle}>Delete</Text>
-            </View>
-        </TouchableOpacity>
-      </View>
+        <View style={styles}>
+            <Text style={styles.classTitle}>Math-255</Text>
+            <TouchableOpacity onPress={() => NavigateToEdit(props)}>
+                <View style={styles.square}>
+                    <Text style={styles.buttonTitle}>Edit</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => NavigateToSilence(props)}>
+                <View style={styles.square}>
+                    <Text style={styles.buttonTitle}>Silence</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => NavigateToDelete(props)}>
+                <View style={styles.square}>
+                    <Text style={styles.buttonTitle}>Delete</Text>
+                </View>
+            </TouchableOpacity>
+        </View>
     );
-  }
-  
+}
+
 export default Options;
 
 const styles = StyleSheet.create({
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
         color: '#fff',
         alignItems: 'center',
     }
-  });
+});

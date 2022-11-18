@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "WorkAround",
+    "slug": "WorkAround",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./Icons/workAround.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
