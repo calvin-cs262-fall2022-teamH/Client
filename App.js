@@ -124,7 +124,7 @@ function repeatClasses(classes){
     var startTimeData = [...values[2].matchAll(regex)][0]; // [original string, year, month, date, time]
     var endTimeData = [...values[3].matchAll(regex)][0]; // [original string, year, month, date, time]
     var startDay = parseInt(startTimeData[2])*31+parseInt(startTimeData[3]);
-    for (var x=startDay; x<= startDay+2; x++){ //change middle number to change num days to repeat for+1(note that months are set to 31 days as a standard)
+    for (var x=startDay; x<= startDay+4; x++){ //change middle number to change num days to repeat for+1(note that months are set to 31 days as a standard)
       var day = ((x % 31) + 31) % 31; //calculates day
       var month = Math.floor(x / 31) % 12; //calculates month
       var year = Math.floor(x / 372)+parseInt(startTimeData[1]); //calculates if the year needs added to
@@ -162,32 +162,32 @@ function HomeScreen({ navigation }) {
     {
       title: "CS-108",
       summary: "SB 223",
-      start: "2022-11-17 08:30:00",
-      end: "2022-11-17 09:30:00",
+      start: "2022-11-18 08:30:00",
+      end: "2022-11-18 09:30:00",
     },
     {
       title: "MATH-171",
       summary: "NH 159",
-      start: "2022-11-05 11:00:00",
-      end: "2022-11-05 11:50:00",
+      start: "2022-11-18 11:00:00",
+      end: "2022-11-18 11:50:00",
     },
     {
       title: "ENGL-101",
       summary: "CFAC 242",
-      start: "2022-11-05 12:00:00",
-      end: "2022-11-05 12:50:00",
+      start: "2022-11-18 12:00:00",
+      end: "2022-11-18 12:50:00",
     },
     {
       title: "REL-121",
       summary: "HH 133",
-      start: "2022-11-05 14:00:00",
-      end: "2022-11-05 14:50:00",
+      start: "2022-11-18 14:00:00",
+      end: "2022-11-18 14:50:00",
     },
     {
       title: "CS-195",
       summary: "SB 010",
-      start: "2022-11-03 15:00:00",
-      end: "2022-11-03 15:50:00",
+      start: "2022-11-18 15:00:00",
+      end: "2022-11-18 15:50:00",
     },
   ];
   const events = repeatClasses(courses);
