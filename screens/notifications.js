@@ -21,6 +21,7 @@ import EventCalendar from "react-native-events-calendar";
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
 import EventRegister from 'react-native-event-listeners';
+import { FlatList } from "react-native-gesture-handler";
 
 let primary = "#F38C00";    //  default primary color     (orange)
 let secondary = "#0167AB";    //  default secondary color   (blue)
@@ -29,31 +30,52 @@ let textColor = "black";      //  default textcolor         (black in LM) (white
 const windowWidth = Dimensions.get('window').width;         //full height of screen
 const windowHeight = Dimensions.get('window').height;
 
-const [theme, setTheme] = useState(false);
 
-export default function SettingsScreen({ route, navigation }) {
-    const [theme, setTheme] = useState(false);
 
-export default function SettingsScreen({ route, navigation }) {
+export default function NotificationsScreen({ route, navigation }) {
+    const [notif, setNotif] = useState(true);
     return (
-        <View style={styles.item}>
-            <Text>Dark Theme</Text>
-            <Switch value={theme} onValueChange={() => {
-                setTheme((value) => !value)
+        <View style={styles.item1}>
+            <Text
+                style={styles.title}
+            >Notifications for all events</Text>
+            <Switch value={notif} onValueChange={() => {
+                setNotif((value) => !value)
+                EventRegister.emit("ChangeNotif", notif)
             }} />
         </View>
-
     )
 }
 
 const styles = StyleSheet.create({
-    item: {
+    item1: {
         backgroundColor: '#FFF',
+        height: 54,
+        width: 380,
         paddig: 15,
-        borderRadius: 10,
+        borderRadius: 17,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 20,
+        left: 3,
+        top: 25,
+    },
+    item2: {
+        backgroundColor: '#FFF',
+        height: 54,
+        width: 358,
+        paddig: 15,
+        borderRadius: 17,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        left: 15,
+        top: 220,
+    },
+
+    title: {
+        height: 30,
+        fontSize: 16,
+        left: 5
     }
 })
