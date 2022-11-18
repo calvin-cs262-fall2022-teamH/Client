@@ -17,8 +17,8 @@ import React, { useCallback, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import Checkbox from "../Components/Checkbox";
 
-const NavigateToOptions = (props) => {
-  props.navigation.navigate("Options");
+const NavigateToHome = (props) => {
+  props.navigation.navigate("Schedule");
 };
 
 const Add = (props) => {
@@ -101,12 +101,12 @@ const Add = (props) => {
           <TextInput style={styles.miniInput} placeholder={"0:00 PM"} />
         </KeyboardAvoidingView>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => NavigateToHome(props)}>
         <View style={styles.square}>
           <Text style={styles.buttonTitle}>Add</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => NavigateToHome(props)}>
         <Text style={styles.cancelText}>Cancel</Text>
       </TouchableOpacity>
     </View>
