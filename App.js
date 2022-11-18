@@ -43,6 +43,7 @@ import DeleteScreen from "./screens/delete";
 import EditScreen from "./screens/edit";
 
 
+
 /*  A space to declare global variables */
 let primary = "#F38C00"; //  default primary color     (orange)
 let secondary = "#0167AB"; //  default secondary color   (blue)
@@ -114,6 +115,30 @@ function Header() {
   );
 };
 
+function repeatClasses(classes){
+  var finalClasses = [];
+  const regex = /(.*)-(.*)-(.*) (.*)/; //regex to parse startTime and endTime of elements of each course
+  for (var i=0; i<classes.length; i++){
+    var values=Object.values(classes[i]); // [name, location, start time, end time]
+    var startTimeData = [...values[2].matchAll(regex)][0]; // [original string, year, month, date, time]
+    var endTimeData = [...values[3].matchAll(regex)][0]; // [original string, year, month, date, time]
+    var startDay = parseInt(startTimeData[2])*31+parseInt(startTimeData[3]);
+    for (var x=startDay; x<= startDay+2; x++){ //change middle number to change num days to repeat for+1(note that months are set to 31 days as a standard)
+      var day = ((x % 31) + 31) % 31; //calculates day
+      var month = Math.floor(x / 31) % 12; //calculates month
+      var year = Math.floor(x / 372)+parseInt(startTimeData[1]); //calculates if the year needs added to
+      var startTime=year.toString()+'-'+month.toString()+'-'+day.toString()+' '+startTimeData[4];
+      var endTime=year.toString()+'-'+month.toString()+'-'+day.toString()+' '+endTimeData[4];
+      finalClasses.push({
+        title: values[0],
+        summary: values[1],
+        start: startTime.toString(),
+        end: endTime.toString(),
+      });
+    }
+  }
+  return(finalClasses);
+}
 
 {/* HOME SCREEN FUNCTION */ }
 
@@ -132,12 +157,12 @@ function HomeScreen({ navigation }) {
   let textColor = "black"; //  default textcolor         (black in LM) (white in DM)
   const windowWidth = Dimensions.get("window").width; //full height of screen
   const windowHeight = Dimensions.get("window").height; //full width of screen
-  const [events, setEvents] = useState([
+  const courses = [
     {
       title: "CS-108",
       summary: "SB 223",
-      start: "2022-11-05 08:30:00",
-      end: "2022-11-05 09:30:00",
+      start: "2022-11-17 08:30:00",
+      end: "2022-11-17 09:30:00",
     },
     {
       title: "MATH-171",
@@ -163,12 +188,13 @@ function HomeScreen({ navigation }) {
       start: "2022-11-03 15:00:00",
       end: "2022-11-03 15:50:00",
     },
-  ]);
-
+  ];
+  const events = repeatClasses(courses);
   //On Click of event showing alert from here
   const editEvent = (event) => {
     navigation.navigate('Edit')
   };
+
 
   return (
     // homeScreen view of schedule + icons
