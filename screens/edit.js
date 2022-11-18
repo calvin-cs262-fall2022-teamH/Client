@@ -21,7 +21,7 @@ const NavigateToOptions = (props) => {
   props.navigation.navigate("Options");
 };
 
-const Add = (props) => {
+const Edit = (props) => {
   const [Sun, setSun] = useState(false);
   const [Mon, setMon] = useState(false);
   const [Tue, setTue] = useState(false);
@@ -31,7 +31,7 @@ const Add = (props) => {
   const [Sat, setSat] = useState(false);
   return (
     <View style={styles.EditBackground}>
-      <Text style={styles.EditTitle}>Add an Event</Text>
+      <Text style={styles.EditTitle}>Edit Math-255</Text>
 
       <Text style={styles.InfoText}>Event Name and Instructor:</Text>
 
@@ -101,19 +101,37 @@ const Add = (props) => {
           <TextInput style={styles.miniInput} placeholder={"0:00 PM"} />
         </KeyboardAvoidingView>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => NavigateToOptions(props)}>
         <View style={styles.square}>
-          <Text style={styles.buttonTitle}>Add</Text>
+          <Text style={styles.buttonTitle}>Done</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
-        <Text style={styles.cancelText}>Cancel</Text>
-      </TouchableOpacity>
+
+      <Image
+        style={{
+          height: 60,
+          width: 60,
+          position: "absolute",
+          bottom: -80,
+          left: 50,
+        }}
+        source={require("../Icons/silence.png")}
+      />
+      <Image
+        style={{
+          height: 70,
+          width: 60,
+          position: "absolute",
+          bottom: -80,
+          right: 50,
+        }}
+        source={require("../Icons/delete.png")}
+      />
     </View>
   );
 };
 
-export default Add;
+export default Edit;
 
 const styles = StyleSheet.create({
   EditBackground: {
@@ -199,25 +217,4 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
   },
-  cancelText: {
-    fontSize: 20,
-    color: "#000a",
-    textAlign: "center",
-  },
 });
-=======
-import { StatusBar } from 'expo-status-bar';
-import { Image, ScrollView, StyleSheet, Switch, Text, View, FlatList, TouchableOpacity, Dimensions } from 'react-native';
-import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ToggleSwitch from 'toggle-switch-react-native';
-
-
-export default function AddScreen({ route, navigation }) {
-    <View>
-        <Text>
-            Add an event!
-        </Text>
-    </View>
-}
-
