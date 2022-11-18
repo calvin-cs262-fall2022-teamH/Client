@@ -39,7 +39,7 @@ import SettingsScreen from "./screens/settings";
 import ProfileScreen from "./screens/profile";
 import AddScreen from "./screens/add";
 import Options from "./screens/options";
-import Delete from "./screens/delete";
+import DeleteScreen from "./screens/delete";
 import EditScreen from "./screens/edit";
 
 
@@ -203,6 +203,11 @@ function HomeStackScreen() {
           headerShown: false
         }}
       />
+      <HomeStack.Screen name="Delete" component={DeleteScreen}
+        options={{
+          headerShown: false
+        }}
+      />
     </HomeStack.Navigator>
   );
 };
@@ -313,7 +318,7 @@ function App() {
           )
         }} ></Tab.Screen>
 
-        <Tab.Screen name={"Notifications"} component={EditScreen} options={{
+        <Tab.Screen name={"Notifications"} component={HomeScreen} options={{
           tabBarIcon: ({ focused }) => (
             <View style={{
               // centring Tab Button...
@@ -324,6 +329,7 @@ function App() {
                 name="bell"
                 size={30}
                 color={focused ? 'blue' : 'gray'}
+                onPress={() => alert("Notifications have been disabled")}
               ></FontAwesome5>
             </View>
           )

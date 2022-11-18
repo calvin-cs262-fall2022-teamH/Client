@@ -17,8 +17,11 @@ import React, { useCallback, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import Checkbox from "../Components/Checkbox";
 
-const NavigateToOptions = (props) => {
-  props.navigation.navigate("Options");
+const NavigateToDelete = (props) => {
+  props.navigation.navigate("Delete");
+};
+const NavigateToHome = (props) => {
+  props.navigation.navigate("Schedule");
 };
 
 const Edit = (props) => {
@@ -101,13 +104,13 @@ const Edit = (props) => {
           <TextInput style={styles.miniInput} placeholder={"0:00 PM"} />
         </KeyboardAvoidingView>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => NavigateToHome(props)}>
         <View style={styles.square}>
           <Text style={styles.buttonTitle}>Done</Text>
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => alert("Notifications have been silenced for Math-255")}>
       <Image
         style={{
           height: 60,
@@ -119,7 +122,7 @@ const Edit = (props) => {
         source={require("../Icons/silence.png")}
       />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => NavigateToDelete(props)}>
       <Image
         style={{
           height: 70,

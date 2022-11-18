@@ -1,25 +1,29 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
 
-const Delete= props => {
+const NavigateToHome = (props) => {
+    props.navigation.navigate("Schedule");
+  };
+
+const DeleteScreen= props => {
     return (
         <View style={styles.deleteBackground}>
             <View style={styles.square}>
                 <Text style={styles.Title}>Are you sure you want to delete MATH-255?</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => NavigateToHome(props)}>
                     <View style={styles.circle}>
                     <Text style={styles.buttonTitle}>Delete</Text>
                     </View>
             </TouchableOpacity>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => NavigateToHome(props)}>
                 <Text style={styles.buttonTitle}>Cancel</Text>
             </TouchableOpacity>
         </View>
         );
     }
 
-    export default Delete;
+    export default DeleteScreen;
 
     const styles = StyleSheet.create({
         deleteBackground : {
