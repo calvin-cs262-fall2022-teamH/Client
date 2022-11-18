@@ -15,7 +15,7 @@ import {
 } from "react-native";
 import React, { useCallback, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import Checkbox from "../checkbox/Checkbox";
+import Checkbox from "../Components/Checkbox";
 
 const NavigateToOptions = (props) => {
   props.navigation.navigate("Options");
@@ -125,74 +125,76 @@ const styles = StyleSheet.create({
     color: "#000a",
     textAlign: "center",
     position: "absolute",
-    top: 40,
-    right: 100,
+    top: '5%',
+    right: '25%',
   },
   writeTaskWrapper: {
-    top: 65,
+    top: '15%',
     flexDirection: "row",
     justifyContent: "center",
   },
   miniInput: {
-    paddingVertical: 15,
-    paddingHorizontal: 15,
+    paddingVertical: '4%',
+    paddingHorizontal: '4%',
     backgroundColor: "#fff",
-    borderRadius: 10,
+    borderRadius: '10%',
     borderColor: "#C0C0C0",
     borderWidth: "1",
     width: 125,
-    margin: 15,
+    margin: '8%',
   },
   input: {
-    paddingVertical: 15,
-    paddingHorizontal: 15,
+    paddingVertical: '4%',
+    paddingHorizontal: '4%',
     backgroundColor: "#fff",
-    borderRadius: 10,
+    borderRadius: '10%',
     borderColor: "#C0C0C0",
     borderWidth: "1",
-    width: 250,
+    width: '55%',
   },
   InfoText: {
     fontSize: 15,
     color: "#000a",
     textAlign: "left",
-    top: 50,
-    left: 90,
-    marginTop: 40,
+    top: '8%',
+    left: '22%',
+    marginTop: '10%',
   },
   timeText: {
     fontSize: 15,
     color: "#000a",
     textAlign: "left",
-    top: 50,
-    left: 90,
-    marginBottom: 30,
+    top: '0%',
+    left: '22%',
+    marginBottom: '8%',
   },
   box: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 90,
+    marginTop: '20%',
   },
   container: {
-    margin: 8,
+    margin: '2%',
   },
   TimeContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    bottom: 80,
+    bottom: '18%',
     marginTop: 30,
   },
   toText: {
     flexDirection: "row",
     justifyContent: "center",
-    top: 95,
+    top: '55%',
     fontSize: 15,
   },
   square: {
-    backgroundColor: "#ffa500",
-    padding: 15,
-    borderRadius: 50,
-    margin: 25,
+    backgroundColor: "#F38C00",
+    padding: '4%',
+    borderRadius: '50%',
+    marginRight: '6%',
+    marginLeft: '6%',
+    bottom: '65%'
   },
   buttonTitle: {
     fontSize: 20,
@@ -203,21 +205,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#000a",
     textAlign: "center",
+    bottom: '20%'
   },
 });
-=======
-import { StatusBar } from 'expo-status-bar';
-import { Image, ScrollView, StyleSheet, Switch, Text, View, FlatList, TouchableOpacity, Dimensions } from 'react-native';
-import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ToggleSwitch from 'toggle-switch-react-native';
-
-
-export default function AddScreen({ route, navigation }) {
-    <View>
-        <Text>
-            Add an event!
-        </Text>
-    </View>
-}
 

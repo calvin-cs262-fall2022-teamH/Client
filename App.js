@@ -40,7 +40,7 @@ import ProfileScreen from "./screens/profile";
 import AddScreen from "./screens/add";
 import Options from "./screens/options";
 import Delete from "./screens/delete";
-import EditScreen from "./screens/Edit";
+import EditScreen from "./screens/edit";
 
 
 /*  A space to declare global variables */
