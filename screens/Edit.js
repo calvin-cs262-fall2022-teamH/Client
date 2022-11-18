@@ -17,6 +17,7 @@ const EditScreen = (props) => {
   const [Thu, setThu] = useState(false);
   const [Fri, setFri] = useState(false);
   const [Sat, setSat] = useState(false);
+
   return (
     <View style={styles.EditBackground}>
       <Text style={styles.EditTitle}>Math-255</Text>

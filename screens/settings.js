@@ -31,6 +31,8 @@ const windowHeight = Dimensions.get('window').height;
 
 const [theme, setTheme] = useState(false);
 
+export default function SettingsScreen({ route, navigation }) {
+    const [theme, setTheme] = useState(false);
 
 export default function SettingsScreen({ route, navigation }) {
     return (

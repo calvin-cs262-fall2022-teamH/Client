@@ -17,11 +17,14 @@ import React, { useCallback, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import Checkbox from "../Components/Checkbox";
 
+const NavigateToDelete = (props) => {
+  props.navigation.navigate("Delete");
+};
 const NavigateToHome = (props) => {
   props.navigation.navigate("Schedule");
 };
 
-const Add = (props) => {
+const Edit = (props) => {
   const [Sun, setSun] = useState(false);
   const [Mon, setMon] = useState(false);
   const [Tue, setTue] = useState(false);
@@ -31,7 +34,7 @@ const Add = (props) => {
   const [Sat, setSat] = useState(false);
   return (
     <View style={styles.EditBackground}>
-      <Text style={styles.EditTitle}>Add an Event</Text>
+      <Text style={styles.EditTitle}>Edit Math-255</Text>
 
       <Text style={styles.InfoText}>Event Name and Instructor:</Text>
 
@@ -103,17 +106,39 @@ const Add = (props) => {
       </View>
       <TouchableOpacity onPress={() => NavigateToHome(props)}>
         <View style={styles.square}>
-          <Text style={styles.buttonTitle}>Add</Text>
+          <Text style={styles.buttonTitle}>Done</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => NavigateToHome(props)}>
-        <Text style={styles.cancelText}>Cancel</Text>
+
+      <TouchableOpacity onPress={() => alert("Notifications have been silenced for Math-255")}>
+      <Image
+        style={{
+          height: 60,
+          width: 60,
+          position: "absolute",
+          bottom: '0%',
+          left: '10%',
+        }}
+        source={require("../Icons/silence.png")}
+      />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => NavigateToDelete(props)}>
+      <Image
+        style={{
+          height: 70,
+          width: 60,
+          position: "absolute",
+          bottom: '0%',
+          right: '10%',
+        }}
+        source={require("../Icons/delete.png")}
+      />
       </TouchableOpacity>
     </View>
   );
 };
 
-export default Add;
+export default Edit;
 
 const styles = StyleSheet.create({
   EditBackground: {
@@ -192,8 +217,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F38C00",
     padding: '4%',
     borderRadius: '50%',
-    marginRight: '6%',
-    marginLeft: '6%',
+    margin: '6%',
     bottom: '65%'
   },
   buttonTitle: {
@@ -201,11 +225,4 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
   },
-  cancelText: {
-    fontSize: 20,
-    color: "#000a",
-    textAlign: "center",
-    bottom: '20%'
-  },
 });
-

@@ -1,5 +1,15 @@
 /*  WorkAround App.js
 
+    desc: Should serve as a home screen for entire app.
+    Will have navigation to Settings.js, Edit.js, &
+    Add.js.
+
+    Main components:
+    - header with User Icon, Notification Bell, & Logo
+    - schedule window with events repeating on proper days,
+    as well as an add icon bottom right of schedule.
+    - footer with Settings Icon & Share Icon (and maybe home)
+
   Programmed by:
   - Tanvi Kulkarni
   - Connor Broekhuizen
@@ -14,14 +24,13 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
-  Platform
 } from "react-native";
+import EventCalendar from "react-native-events-calendar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useRef } from "react";
-import EventCalendar from "react-native-events-calendar";
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
 import EventRegister from 'react-native-event-listeners';
@@ -30,8 +39,9 @@ import SettingsScreen from "./screens/settings";
 import ProfileScreen from "./screens/profile";
 import AddScreen from "./screens/add";
 import Options from "./screens/options";
-import Delete from "./screens/delete";
-import EditScreen from "./screens/Edit";
+import DeleteScreen from "./screens/delete";
+import EditScreen from "./screens/edit";
+
 
 
 /*  A space to declare global variables */
@@ -42,8 +52,13 @@ let textColor = "black"; //  default textcolor         (black in LM) (white in D
 const windowWidth = Dimensions.get("window").width; //full height of screen
 const windowHeight = Dimensions.get("window").height; //full width of screen
 const Stack = createNativeStackNavigator(); //stack declaration
-
 const Tab = createBottomTabNavigator();
+
+/**
+ * A block of function declarations for future use:
+ * - to be used for each icon to be clicked & redirect
+ * to according pages. (e.g. Add button -> Add Page)
+ */
 
 /* function: goHome              workAround logo clicked -> homeScreen                */
 function goHome() { }
@@ -61,7 +76,6 @@ function goNotification() {
 }
 /* function: goAdd               add icon clicked -> add event page/popup             */
 function goAdd() { }
-/* function: goOptions      add event clicked -> event page */
 function goOptions() { }
 
 const styles = StyleSheet.create({
@@ -102,9 +116,41 @@ function Header() {
   );
 };
 
-
+function repeatClasses(classes){
+  var finalClasses = [];
+  const regex = /(.*)-(.*)-(.*) (.*)/; //regex to parse startTime and endTime of elements of each course
+  for (var i=0; i<classes.length; i++){
+    var values=Object.values(classes[i]); // [name, location, start time, end time]
+    var startTimeData = [...values[2].matchAll(regex)][0]; // [original string, year, month, date, time]
+    var endTimeData = [...values[3].matchAll(regex)][0]; // [original string, year, month, date, time]
+    var startDay = parseInt(startTimeData[2])*31+parseInt(startTimeData[3]);
+    for (var x=startDay; x<= startDay+2; x++){ //change middle number to change num days to repeat for+1(note that months are set to 31 days as a standard)
+      var day = ((x % 31) + 31) % 31; //calculates day
+      var month = Math.floor(x / 31) % 12; //calculates month
+      var year = Math.floor(x / 372)+parseInt(startTimeData[1]); //calculates if the year needs added to
+      var startTime=year.toString()+'-'+month.toString()+'-'+day.toString()+' '+startTimeData[4];
+      var endTime=year.toString()+'-'+month.toString()+'-'+day.toString()+' '+endTimeData[4];
+      finalClasses.push({
+        title: values[0],
+        summary: values[1],
+        start: startTime.toString(),
+        end: endTime.toString(),
+      });
+    }
+  }
+  return(finalClasses);
+}
 
 {/* HOME SCREEN FUNCTION */ }
+
+/**
+ * HomeScreen function
+ * @param {*} param0
+ * @returns GUI outputted with:
+ *  - workAround logo
+ *  - schedule with events
+ *  - share & settings icons
+ */
 function HomeScreen({ navigation }) {
   let primary = "#F38C00"; //  default primary color     (orange)
   let secondary = "#0167AB"; //  default secondary color   (blue)
@@ -112,12 +158,12 @@ function HomeScreen({ navigation }) {
   let textColor = "black"; //  default textcolor         (black in LM) (white in DM)
   const windowWidth = Dimensions.get("window").width; //full height of screen
   const windowHeight = Dimensions.get("window").height; //full width of screen
-  const [events, setEvents] = useState([
+  const courses = [
     {
       title: "CS-108",
       summary: "SB 223",
-      start: "2022-11-05 08:30:00",
-      end: "2022-11-05 09:30:00",
+      start: "2022-11-17 08:30:00",
+      end: "2022-11-17 09:30:00",
     },
     {
       title: "MATH-171",
@@ -143,12 +189,13 @@ function HomeScreen({ navigation }) {
       start: "2022-11-03 15:00:00",
       end: "2022-11-03 15:50:00",
     },
-  ]);
-
+  ];
+  const events = repeatClasses(courses);
   //On Click of event showing alert from here
   const editEvent = (event) => {
     navigation.navigate('Edit')
   };
+
 
   return (
     // homeScreen view of schedule + icons
@@ -183,11 +230,14 @@ function HomeStackScreen() {
           headerShown: false
         }}
       />
+      <HomeStack.Screen name="Delete" component={DeleteScreen}
+        options={{
+          headerShown: false
+        }}
+      />
     </HomeStack.Navigator>
   );
 };
-
-
 
 
 function App() {
@@ -311,7 +361,7 @@ function App() {
           )
         }} ></Tab.Screen>
 
-        <Tab.Screen name={"Notifications"} component={EditScreen} options={{
+        <Tab.Screen name={"Notifications"} component={HomeScreen} options={{
           tabBarIcon: ({ focused }) => (
             <View style={{
               // centring Tab Button...
@@ -322,6 +372,7 @@ function App() {
                 name="bell"
                 size={30}
                 color={focused ? 'blue' : 'gray'}
+                onPress={() => alert("Notifications have been disabled")}
               ></FontAwesome5>
             </View>
           )
