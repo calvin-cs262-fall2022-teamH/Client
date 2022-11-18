@@ -23,6 +23,7 @@
     "react-drawline": "^1.1.0",
     "react-native": "0.69.6",
     "react-native-curved-bottom-bar": "^2.1.4",
+    "react-native-event-listeners": "^1.0.7",
     "react-native-events-calendar": "^1.0.8",
     "react-native-gesture-handler": "~2.5.0",
     "react-native-hr-component": "^2.0.3",
