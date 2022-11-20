@@ -24,7 +24,7 @@ const NavigateToHome = (props) => {
   props.navigation.navigate("Schedule");
 };
 
-const Edit = (props) => {
+const EditScreen = (props) => {
   const [Sun, setSun] = useState(false);
   const [Mon, setMon] = useState(false);
   const [Tue, setTue] = useState(false);
@@ -111,34 +111,34 @@ const Edit = (props) => {
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => alert("Notifications have been silenced for Math-255")}>
-      <Image
-        style={{
-          height: 60,
-          width: 60,
-          position: "absolute",
-          bottom: '0%',
-          left: '10%',
-        }}
-        source={require("../Icons/silence.png")}
-      />
+        <Image
+          style={{
+            height: 60,
+            width: 60,
+            position: "absolute",
+            bottom: '0%',
+            left: '10%',
+          }}
+          source={require("../Icons/silence.png")}
+        />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => NavigateToDelete(props)}>
-      <Image
-        style={{
-          height: 70,
-          width: 60,
-          position: "absolute",
-          bottom: '0%',
-          right: '10%',
-        }}
-        source={require("../Icons/delete.png")}
-      />
+        <Image
+          style={{
+            height: 70,
+            width: 60,
+            position: "absolute",
+            bottom: '0%',
+            right: '10%',
+          }}
+          source={require("../Icons/delete.png")}
+        />
       </TouchableOpacity>
     </View>
   );
 };
 
-export default Edit;
+export default EditScreen;
 
 const styles = StyleSheet.create({
   EditBackground: {

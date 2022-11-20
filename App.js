@@ -16,7 +16,8 @@
   - Braden Lint
   - Logan Humphrey
 */
-import React, { useEffect, useState } from "react";
+
+import React, { useState } from "react";
 import {
   Animated,
   Image,
@@ -33,15 +34,14 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { useRef } from "react";
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
-import EventRegister from 'react-native-event-listeners';
 //Importing all Screens Needed
 import SettingsScreen from "./screens/settings";
 import ProfileScreen from "./screens/profile";
 import AddScreen from "./screens/add";
 import Options from "./screens/options";
-import DeleteScreen from "./screens/delete";
+import Delete from "./screens/delete";
 import EditScreen from "./screens/edit";
-
+import NotificationsScreen from "./screens/notifications";
 
 
 /*  A space to declare global variables */
@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 //Header Function
 function Header() {
   return (
@@ -116,30 +115,32 @@ function Header() {
   );
 };
 
-function repeatClasses(classes){
-  var finalClasses = [];
-  const regex = /(.*)-(.*)-(.*) (.*)/; //regex to parse startTime and endTime of elements of each course
-  for (var i=0; i<classes.length; i++){
-    var values=Object.values(classes[i]); // [name, location, start time, end time]
-    var startTimeData = [...values[2].matchAll(regex)][0]; // [original string, year, month, date, time]
-    var endTimeData = [...values[3].matchAll(regex)][0]; // [original string, year, month, date, time]
-    var startDay = parseInt(startTimeData[2])*31+parseInt(startTimeData[3]);
-    for (var x=startDay; x<= startDay+4; x++){ //change middle number to change num days to repeat for+1(note that months are set to 31 days as a standard)
-      var day = ((x % 31) + 31) % 31; //calculates day
-      var month = Math.floor(x / 31) % 12; //calculates month
-      var year = Math.floor(x / 372)+parseInt(startTimeData[1]); //calculates if the year needs added to
-      var startTime=year.toString()+'-'+month.toString()+'-'+day.toString()+' '+startTimeData[4];
-      var endTime=year.toString()+'-'+month.toString()+'-'+day.toString()+' '+endTimeData[4];
-      finalClasses.push({
-        title: values[0],
-        summary: values[1],
-        start: startTime.toString(),
-        end: endTime.toString(),
-      });
-    }
-  }
-  return(finalClasses);
-}
+
+// function repeatClasses(classes) {
+//   var finalClasses = [];
+//   const regex = /(.*)-(.*)-(.*) (.*)/; //regex to parse startTime and endTime of elements of each course
+//   for (var i = 0; i < classes.length; i++) {
+//     var values = Object.values(classes[i]); // [name, location, start time, end time]
+//     var startTimeData = [...values[2].matchAll(regex)][0]; // [original string, year, month, date, time]
+//     var endTimeData = [...values[3].matchAll(regex)][0]; // [original string, year, month, date, time]
+//     var startDay = parseInt(startTimeData[2]) * 31 + parseInt(startTimeData[3]);
+//     for (var x = startDay; x <= startDay + 4; x++) { //change middle number to change num days to repeat for+1(note that months are set to 31 days as a standard)
+//       var day = ((x % 31) + 31) % 31; //calculates day
+//       var month = Math.floor(x / 31) % 12; //calculates month
+//       var year = Math.floor(x / 372) + parseInt(startTimeData[1]); //calculates if the year needs added to
+//       var startTime = year.toString() + '-' + month.toString() + '-' + day.toString() + ' ' + startTimeData[4];
+//       var endTime = year.toString() + '-' + month.toString() + '-' + day.toString() + ' ' + endTimeData[4];
+//       finalClasses.push({
+//         title: values[0],
+//         summary: values[1],
+//         start: startTime.toString(),
+//         end: endTime.toString(),
+//       });
+//     }
+//   }
+//   return (finalClasses);
+// }
+
 
 {/* HOME SCREEN FUNCTION */ }
 
@@ -190,8 +191,9 @@ function HomeScreen({ navigation }) {
       end: "2022-11-18 15:50:00",
     },
   ];
-  const events = repeatClasses(courses);
-  //On Click of event showing alert from here
+  const events = courses;
+  // repeatClasses(courses);
+  // //On Click of event showing alert from here
   const editEvent = (event) => {
     navigation.navigate('Edit')
   };
@@ -230,33 +232,14 @@ function HomeStackScreen() {
           headerShown: false
         }}
       />
-      <HomeStack.Screen name="Delete" component={DeleteScreen}
-        options={{
-          headerShown: false
-        }}
-      />
     </HomeStack.Navigator>
   );
 };
 
 
+
+
 function App() {
-
-  {/*State For Theme Change Across The App*/ }
-  const [theme, setTheme] = useState(false);
-
-  useEffect(() => {
-    let eventListener = EventRegister.addEventListener(
-      "changeTheme",
-      (data) => {
-        setTheme(data);
-      }
-    );
-    return () => {
-      EventRegister.removeEventListner(eventListener);
-    };
-  });
-
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
   return (
     <NavigationContainer>
@@ -299,7 +282,7 @@ function App() {
               <FontAwesome5
                 name="home"
                 size={30}
-                color={focused ? 'blue' : 'gray'}
+                color={focused ? '#0167AB' : 'gray'}
               ></FontAwesome5>
             </View>
           )
@@ -308,6 +291,7 @@ function App() {
 
         {/*Settings Screen Tab*/}
         <Tab.Screen name={"Settings"} component={SettingsScreen} options={{
+          headerTitle: () => <Header />,
           tabBarIcon: ({ focused }) => (
             <View style={{
               // centring Tab Button...
@@ -317,7 +301,7 @@ function App() {
               <FontAwesome5
                 name="cog"
                 size={30}
-                color={focused ? 'blue' : 'gray'}
+                color={focused ? '#0167AB' : 'gray'}
               ></FontAwesome5>
             </View>
           )
@@ -355,13 +339,13 @@ function App() {
               <FontAwesome5
                 name="user-alt"
                 size={30}
-                color={focused ? 'blue' : 'gray'}
+                color={focused ? '#0167AB' : 'gray'}
               ></FontAwesome5>
             </View>
           )
         }} ></Tab.Screen>
 
-        <Tab.Screen name={"Notifications"} component={HomeScreen} options={{
+        <Tab.Screen name={"Notifications"} component={NotificationsScreen} options={{
           tabBarIcon: ({ focused }) => (
             <View style={{
               // centring Tab Button...
@@ -371,8 +355,7 @@ function App() {
               <FontAwesome5
                 name="bell"
                 size={30}
-                color={focused ? 'blue' : 'gray'}
-                onPress={() => alert("Notifications have been disabled")}
+                color={focused ? '#0167AB' : 'gray'}
               ></FontAwesome5>
             </View>
           )
@@ -382,13 +365,6 @@ function App() {
 
   );
 }
-
-function getWidth() {
-  let width = Dimensions.get("window").width;
-  width = width - 80; // Horizontal Padding = 20...
-  return width / 5; // Total five Tabs...
-}
-
 
 
 export default App;
