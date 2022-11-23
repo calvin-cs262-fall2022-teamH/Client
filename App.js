@@ -162,31 +162,29 @@ function eventObjMaker(values, day, startTime, endTime){
     end: formatedDate(date, endTime)};
   return hold;
 }
-//takes in [eventID, name, startTime, endTime, dayDesignation, location, eventLead, scheduleID]
-//returns weekly classes of [title, summary (location), startTime, endTime] STARTING ON THE NEXT MONDAY
+//takes in [{eventID, name, startTime, endTime, dayDesignation, location, eventLead, scheduleID}]
+//returns weekly classes of {title, summary (location), startTime, endTime} STARTING ON THE NEXT MONDAY
 function getWeekly(classes){
   var finalClasses = [];
   const regex = /(.*)-(.*)-(.*) (.*)/; //regex to parse startTime and endTime of elements of each course
   for (var i = 0; i < classes.length; i++) {
     var values = Object.values(classes[i]); // [eventID, name, startTime, endTime, dayDesignation, location, eventLead, scheduleID]
     var dayDes = values[4];
-    var startTimeData = [...values[2].matchAll(regex)][0]; // [original string, year, month, date, time]
-    var endTimeData = [...values[3].matchAll(regex)][0]; // [original string, year, month, date, time]
-    if (dayDes.includes("M")){finalClasses.push(eventObjMaker(values, 1, startTimeData[4], endTimeData[4]));}
-    if(dayDes.includes("W")){finalClasses.push(eventObjMaker(values, 3, startTimeData[4], endTimeData[4]));}
-    if(dayDes.includes("F")){finalClasses.push(eventObjMaker(values, 5, startTimeData[4], endTimeData[4]));}
+    if (dayDes.includes("M")){finalClasses.push(eventObjMaker(values, 1, values[2], values[3]));}
+    if(dayDes.includes("W")){finalClasses.push(eventObjMaker(values, 3, values[2], values[3]));}
+    if(dayDes.includes("F")){finalClasses.push(eventObjMaker(values, 5, values[2], values[3]));}
     if(dayDes.includes("Th")){
       if(dayDes.includes("TWTh") || dayDes.includes("TTH")){
-        finalClasses.push(eventObjMaker(values, 2, startTimeData[4], endTimeData[4]));
-        finalClasses.push(eventObjMaker(values, 4, startTimeData[4], endTimeData[4]));}
-      else{finalClasses.push(eventObjMaker(values, 4, startTimeData[4], endTimeData[4]));}}
+        finalClasses.push(eventObjMaker(values, 2, values[2], values[3]));
+        finalClasses.push(eventObjMaker(values, 4, values[2], values[3]));}
+      else{finalClasses.push(eventObjMaker(values, 4, values[2], values[3]));}}
     else{
-      if(dayDes.includes("T")){finalClasses.push(eventObjMaker(values, 2, startTimeData[4], endTimeData[4]));}}
+      if(dayDes.includes("T")){finalClasses.push(eventObjMaker(values, 2, values[2], values[3]));}}
     if(dayDes.includes("Su")){
-      if(dayDes.includes("SSu")){finalClasses.push(eventObjMaker(values, 6, startTimeData[4], endTimeData[4]));finalClasses.push(eventObjMaker(values, 7, startTimeData[4], endTimeData[4]));}
-      else{finalClasses.push(eventObjMaker(values, 7, startTimeData[4], endTimeData[4]));}}
+      if(dayDes.includes("SSu")){finalClasses.push(eventObjMaker(values, 6, values[2], values[3]));finalClasses.push(eventObjMaker(values, 7, startTimeData[4], endTimeData[4]));}
+      else{finalClasses.push(eventObjMaker(values, 7, values[2], values[3]));}}
     else{
-      if(dayDes.includes("S")){finalClasses.push(eventObjMaker(values, 6, startTimeData[4], endTimeData[4]));}}
+      if(dayDes.includes("S")){finalClasses.push(eventObjMaker(values, 6, values[2], values[3]));}}
   }
   return finalClasses;
 }
