@@ -42,6 +42,7 @@ import Options from "./screens/options";
 import Delete from "./screens/delete";
 import EditScreen from "./screens/edit";
 import NotificationsScreen from "./screens/notifications";
+import DeleteScreen from './screens/delete';
 
 
 /*  A space to declare global variables */
@@ -101,15 +102,14 @@ function Header() {
       <View style={{ flex: 1, flexDirection: "row", flexWrap: "wrap" }}>
 
         {/* workAround logo / home button */}
-        <TouchableOpacity
-          style={{ position: "absolute" }} onPress={goHome}>
+        <View >
           <Image style={{
             height: 85,
             width: 160,
-            left: 40,
+            left: 100,
             top: -50,
           }} source={require('./Icons/workAround.png')} />
-        </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -227,7 +227,7 @@ function HomeStackScreen() {
       <HomeStack.Screen name="Schedule" component={HomeScreen} options={{
         headerShown: false
       }} />
-      <HomeStack.Screen name="Edit" component={EditScreen}
+      <HomeStack.Screen name="Edit" component={EditStackScreen}
         options={{
           headerShown: false
         }}
@@ -235,6 +235,24 @@ function HomeStackScreen() {
     </HomeStack.Navigator>
   );
 };
+
+const EditStack = createNativeStackNavigator();
+
+function EditStackScreen() {
+  return (
+    <EditStack.Navigator>
+      <HomeStack.Screen name="Edit" component={EditScreen} options={{
+        headerShown: false
+      }} />
+      <HomeStack.Screen name="Delete" component={DeleteScreen}
+        options={{
+          headerShown: false
+        }}
+      />
+    </EditStack.Navigator>
+  );
+};
+
 
 
 
