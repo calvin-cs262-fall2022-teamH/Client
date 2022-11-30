@@ -34,127 +34,132 @@ const EditScreen = (props) => {
   const [Sat, setSat] = useState(false);
   return (
     <View style={styles.EditBackground}>
-      <Text style={styles.EditTitle}>Edit Math-255</Text>
+      <ScrollView>
+        <Text style={styles.EditTitle}>Edit Math-255</Text>
 
-      <Text style={styles.InfoText}>Event Name and Instructor:</Text>
-
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.writeTaskWrapper}
-      >
-        <TextInput style={styles.input} placeholder={"Event Name"} />
-      </KeyboardAvoidingView>
-
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.writeTaskWrapper}
-      >
-        <TextInput style={styles.input} placeholder={"Instructor (optional)"} />
-      </KeyboardAvoidingView>
-
-      <Text style={styles.InfoText}>Location:</Text>
-
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.writeTaskWrapper}
-      >
-        <TextInput style={styles.input} placeholder={"Location (optional)"} />
-      </KeyboardAvoidingView>
-
-      <View style={styles.box}>
-        <View style={styles.container}>
-          <Checkbox title="S" onPress={() => setSun(!Sun)} isChecked={Sun} />
-        </View>
-        <View style={styles.container}>
-          <Checkbox title="M" onPress={() => setMon(!Mon)} isChecked={Mon} />
-        </View>
-        <View style={styles.container}>
-          <Checkbox title="T" onPress={() => setTue(!Tue)} isChecked={Tue} />
-        </View>
-        <View style={styles.container}>
-          <Checkbox title="W" onPress={() => setWed(!Wed)} isChecked={Wed} />
-        </View>
-        <View style={styles.container}>
-          <Checkbox title="TH" onPress={() => setThu(!Thu)} isChecked={Thu} />
-        </View>
-        <View style={styles.container}>
-          <Checkbox title="F" onPress={() => setFri(!Fri)} isChecked={Fri} />
-        </View>
-        <View style={styles.container}>
-          <Checkbox title="S" onPress={() => setSat(!Sat)} isChecked={Sat} />
-        </View>
-      </View>
-
-      <Text style={styles.timeText}>Event Time:</Text>
-
-      <View style={styles.TimeContainer}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.writeTaskWrapper}
-        >
-          <TextInput style={styles.miniInput} placeholder={"0:00 AM"} />
-        </KeyboardAvoidingView>
-
-        <Text style={styles.toText}>to</Text>
+        <Text style={styles.InfoText}>Event Name and Instructor:</Text>
 
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.writeTaskWrapper}
         >
-          <TextInput style={styles.miniInput} placeholder={"0:00 PM"} />
+          <TextInput style={styles.input} placeholder={"Event Name"} />
         </KeyboardAvoidingView>
-      </View>
-      <TouchableOpacity onPress={() => NavigateToHome(props)}>
-        <View style={styles.square}>
-          <Text style={styles.buttonTitle}>Done</Text>
-        </View>
-      </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => alert("Notifications have been silenced for Math-255")}>
-        <Image
-          style={{
-            height: 60,
-            width: 60,
-            position: "absolute",
-            bottom: '0%',
-            left: '10%',
-          }}
-          source={require("../Icons/silence.png")}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => NavigateToDelete(props)}>
-        <Image
-          style={{
-            height: 70,
-            width: 60,
-            position: "absolute",
-            bottom: '0%',
-            right: '10%',
-          }}
-          source={require("../Icons/delete.png")}
-        />
-      </TouchableOpacity>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.writeTaskWrapper}
+        >
+          <TextInput style={styles.input} placeholder={"Instructor (optional)"} />
+        </KeyboardAvoidingView>
+
+        <Text style={styles.InfoText}>Location:</Text>
+
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.writeTaskWrapper}
+        >
+          <TextInput style={styles.input} placeholder={"Location (optional)"} />
+        </KeyboardAvoidingView>
+
+        <View style={styles.box}>
+          <View style={styles.container}>
+            <Checkbox title="S" onPress={() => setSun(!Sun)} isChecked={Sun} />
+          </View>
+          <View style={styles.container}>
+            <Checkbox title="M" onPress={() => setMon(!Mon)} isChecked={Mon} />
+          </View>
+          <View style={styles.container}>
+            <Checkbox title="T" onPress={() => setTue(!Tue)} isChecked={Tue} />
+          </View>
+          <View style={styles.container}>
+            <Checkbox title="W" onPress={() => setWed(!Wed)} isChecked={Wed} />
+          </View>
+          <View style={styles.container}>
+            <Checkbox title="TH" onPress={() => setThu(!Thu)} isChecked={Thu} />
+          </View>
+          <View style={styles.container}>
+            <Checkbox title="F" onPress={() => setFri(!Fri)} isChecked={Fri} />
+          </View>
+          <View style={styles.container}>
+            <Checkbox title="S" onPress={() => setSat(!Sat)} isChecked={Sat} />
+          </View>
+        </View>
+
+        <Text style={styles.timeText}>Event Time:</Text>
+
+        <View style={styles.TimeContainer}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.writeTaskWrapper}
+          >
+            <TextInput style={styles.miniInput} placeholder={"0:00 AM"} />
+          </KeyboardAvoidingView>
+
+          <Text style={styles.toText}>to</Text>
+
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.writeTaskWrapper}
+          >
+            <TextInput style={styles.miniInput} placeholder={"0:00 PM"} />
+          </KeyboardAvoidingView>
+        </View>
+        <View>
+          <TouchableOpacity onPress={() => alert("Notifications have been silenced for Math-255")}>
+            <Image
+              style={{
+                height: 60,
+                width: 60,
+                position: "absolute",
+                bottom: '0%',
+                left: '3%',
+                top: '1%'
+              }}
+              source={require("../Icons/silence.png")}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.square} onPress={() => NavigateToHome(props)}>
+            <Text style={styles.buttonTitle}>Done</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => NavigateToDelete(props)}>
+            <Image
+              style={{
+                height: 60,
+                width: 60,
+                position: "absolute",
+                bottom: '30%',
+                right: '3%',
+              }}
+              source={require("../Icons/delete.png")}
+            />
+          </TouchableOpacity>
+        </View>
+
+      </ScrollView>
     </View>
   );
 };
 
 export default EditScreen;
 
+
 const styles = StyleSheet.create({
   EditBackground: {
     justifyContent: "center",
   },
   EditTitle: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "bold",
     color: "#000a",
     textAlign: "center",
     position: "absolute",
-    top: '5%',
-    right: '25%',
+    top: '3%',
+    right: '20%',
   },
   writeTaskWrapper: {
-    top: '15%',
+    top: '12%',
     flexDirection: "row",
     justifyContent: "center",
   },
@@ -181,9 +186,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#000a",
     textAlign: "left",
-    top: '8%',
+    top: '6%',
     left: '22%',
-    marginTop: '10%',
+    marginTop: '8%',
   },
   timeText: {
     fontSize: 15,
@@ -199,7 +204,7 @@ const styles = StyleSheet.create({
     marginTop: '20%',
   },
   container: {
-    margin: '2%',
+    margin: '1%',
   },
   TimeContainer: {
     flexDirection: "row",
@@ -215,10 +220,16 @@ const styles = StyleSheet.create({
   },
   square: {
     backgroundColor: "#F38C00",
-    padding: '4%',
-    borderRadius: '50%',
-    margin: '6%',
-    bottom: '65%'
+    padding: '3%',
+    borderRadius: '30%',
+    margin: '3%',
+    bottom: '65%',
+    height: '26%',
+    width: '45%',
+    justifyContent: "center",
+    bottom: '35%',
+    position: 'relative',
+    left: '25%'
   },
   buttonTitle: {
     fontSize: 20,
