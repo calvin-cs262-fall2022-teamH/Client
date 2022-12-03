@@ -184,15 +184,15 @@ function getWeekly(classes){
     if (dayDes.includes("M")){finalClasses.push(eventObjMaker(values, 1, values[2], values[3]));}
     if(dayDes.includes("W")){finalClasses.push(eventObjMaker(values, 3, values[2], values[3]));}
     if(dayDes.includes("F")){finalClasses.push(eventObjMaker(values, 5, values[2], values[3]));}
-    if(dayDes.includes("Th")){
-      if(dayDes.includes("TWTh") || dayDes.includes("TTH")){
+    if(dayDes.includes("TH")){
+      if(dayDes.includes("TWTH") || dayDes.includes("TTH")){
         finalClasses.push(eventObjMaker(values, 2, values[2], values[3]));
         finalClasses.push(eventObjMaker(values, 4, values[2], values[3]));}
       else{finalClasses.push(eventObjMaker(values, 4, values[2], values[3]));}}
     else{
       if(dayDes.includes("T")){finalClasses.push(eventObjMaker(values, 2, values[2], values[3]));}}
-    if(dayDes.includes("Su")){
-      if(dayDes.includes("SSu")){finalClasses.push(eventObjMaker(values, 6, values[2], values[3]));finalClasses.push(eventObjMaker(values, 7, values[2], values[3]));}
+    if(dayDes.includes("SU")){
+      if(dayDes.includes("SSU")){finalClasses.push(eventObjMaker(values, 6, values[2], values[3]));finalClasses.push(eventObjMaker(values, 7, values[2], values[3]));}
       else{finalClasses.push(eventObjMaker(values, 7, values[2], values[3]));}}
     else{
       if(dayDes.includes("S")){finalClasses.push(eventObjMaker(values, 6, values[2], values[3]));}}
