@@ -17,7 +17,7 @@
   - Logan Humphrey
 */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Animated,
   Image,
@@ -144,53 +144,58 @@ function Header() {
 
 //takes in date obj and startTime and returns string in format YYYY-MM-DD TT:TT:TT 
 //where date portion is drom date and time is from startTime
-function formatedDate(date, startTime) {
-  var month = date.getMonth() + 1; //because the month is given as an index
-  return date.getFullYear().toString() + '-' + month.toString() + '-' + date.getDate().toString() + ' ' + startTime;
+function formatedDate(date, startTime){
+  var month = date.getMonth()+1; //because the month is given as an index
+  //for some reason, event calendar needs all single digit values to have a 0 infront, hence all the offsetter values
+  var zeroOffsetter = '';
+  var dayOffsetter = '';
+  var monthOffsetter = '';
+  var monthStr = month.toString();
+  var day = date.getDate();
+  if (startTime[1] == ':' ){zeroOffsetter = '0';}
+  if (monthStr[1] == ':'){monthOffsetter='0';}
+  if (day<10){dayOffsetter = '0';}
+  return date.getFullYear().toString()+'-'+monthOffsetter+monthStr+'-'+dayOffsetter+day.toString()+' '+zeroOffsetter+startTime+':00';
 }
 
-//returns [title, summary (location), startTime, endTime]
+//returns {title, summary (location), startTime, endTime}
 //params: values: same as values in getWeekly(), day: int for which day (monday is 1, tuesday is 2 etc), start/endTime in format 'TT:TT:TT'
-function eventObjMaker(values, day, startTime, endTime) {
-  const current = new Date().getTime() - 18000000;
+function eventObjMaker(values, day, startTime, endTime){
+  const current = new Date().getTime()- 18000000;
   const lastSunday = current - (86400000 * new Date(current).getDay());//gets date for last sunday
-  var date = new Date(lastSunday + day * 86400000);
+  var date = new Date(lastSunday + day*86400000);
   const hold = {
-    title: values[1],
-    summary: values[5],
-    start: formatedDate(date, startTime),
-    end: formatedDate(date, endTime)
-  };
+    title: values[1], 
+    summary: values[5], 
+    start: formatedDate(date, startTime), 
+    end: formatedDate(date, endTime)};
   return hold;
 }
 //takes in [{eventID, name, startTime, endTime, dayDesignation, location, eventLead, scheduleID}]
-//returns weekly classes of {title, summary (location), startTime, endTime} STARTING ON THE NEXT MONDAY
-function getWeekly(classes) {
+//returns weekly classes of [{title, summary (location), startTime, endTime}] STARTING ON THE LAST MONDAY
+function getWeekly(classes){
   var finalClasses = [];
   const regex = /(.*)-(.*)-(.*) (.*)/; //regex to parse startTime and endTime of elements of each course
   for (var i = 0; i < classes.length; i++) {
     var values = Object.values(classes[i]); // [eventID, name, startTime, endTime, dayDesignation, location, eventLead, scheduleID]
     var dayDes = values[4];
-    if (dayDes.includes("M")) { finalClasses.push(eventObjMaker(values, 1, values[2], values[3])); }
-    if (dayDes.includes("W")) { finalClasses.push(eventObjMaker(values, 3, values[2], values[3])); }
-    if (dayDes.includes("F")) { finalClasses.push(eventObjMaker(values, 5, values[2], values[3])); }
-    if (dayDes.includes("Th")) {
-      if (dayDes.includes("TWTh") || dayDes.includes("TTH")) {
+    // var startTimeData = [...values[2].matchAll(regex)][0]; // [original string, year, month, date, time]
+    // var endTimeData = [...values[3].matchAll(regex)][0]; // [original string, year, month, date, time]
+    if (dayDes.includes("M")){finalClasses.push(eventObjMaker(values, 1, values[2], values[3]));}
+    if(dayDes.includes("W")){finalClasses.push(eventObjMaker(values, 3, values[2], values[3]));}
+    if(dayDes.includes("F")){finalClasses.push(eventObjMaker(values, 5, values[2], values[3]));}
+    if(dayDes.includes("TH")){
+      if(dayDes.includes("TWTH") || dayDes.includes("TTH")){
         finalClasses.push(eventObjMaker(values, 2, values[2], values[3]));
-        finalClasses.push(eventObjMaker(values, 4, values[2], values[3]));
-      }
-      else { finalClasses.push(eventObjMaker(values, 4, values[2], values[3])); }
-    }
-    else {
-      if (dayDes.includes("T")) { finalClasses.push(eventObjMaker(values, 2, values[2], values[3])); }
-    }
-    if (dayDes.includes("Su")) {
-      if (dayDes.includes("SSu")) { finalClasses.push(eventObjMaker(values, 6, values[2], values[3])); finalClasses.push(eventObjMaker(values, 7, values[2], values[3])); }
-      else { finalClasses.push(eventObjMaker(values, 7, values[2], values[3])); }
-    }
-    else {
-      if (dayDes.includes("S")) { finalClasses.push(eventObjMaker(values, 6, values[2], values[3])); }
-    }
+        finalClasses.push(eventObjMaker(values, 4, values[2], values[3]));}
+      else{finalClasses.push(eventObjMaker(values, 4, values[2], values[3]));}}
+    else{
+      if(dayDes.includes("T")){finalClasses.push(eventObjMaker(values, 2, values[2], values[3]));}}
+    if(dayDes.includes("SU")){
+      if(dayDes.includes("SSU")){finalClasses.push(eventObjMaker(values, 6, values[2], values[3]));finalClasses.push(eventObjMaker(values, 7, values[2], values[3]));}
+      else{finalClasses.push(eventObjMaker(values, 7, values[2], values[3]));}}
+    else{
+      if(dayDes.includes("S")){finalClasses.push(eventObjMaker(values, 6, values[2], values[3]));}}
   }
   return finalClasses;
 }
@@ -244,12 +249,21 @@ function HomeScreen({ navigation }) {
     },
   ];
   ///testing for getWeekly()
-  const classees = [{ eventID: 4, name: "CS-195", startTime: "2022-11-18 15:00:00", endTime: "2022-11-18 15:50:00", dayDesignation: "MTWThFSSu", location: "SB 010", eventLead: "your mom", scheduleID: 3 }];
-  const events = getWeekly(classees);
+  // const classees = [{ eventID: 4, name: "CS-195", startTime: "2022-11-18 15:00:00", endTime: "2022-11-18 15:50:00", dayDesignation: "MTWThFSSu", location: "SB 010", eventLead: "your mom", scheduleID: 3 }];
+  // const events = getWeekly(classees);
   //testing for getWeekly()
 
-  // repeatClasses(courses);
-  // //On Click of event showing alert from here
+  //testing client->server
+  const student = "Sarah Johnson";
+  const semesterYear = "Fall 2023";
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch('https://workaroundservice.herokuapp.com/'+student+'/'+semesterYear)
+        .then((response) => response.json())
+        .then((json) => setData(json))
+        .catch((error) => console.error(error));
+  }, []);
+  //testing client->server
   const editEvent = (event) => {
     navigation.navigate('Edit')
   };
@@ -261,7 +275,7 @@ function HomeScreen({ navigation }) {
       <View style={styles.calendar}>
         <EventCalendar
           eventTapped={editEvent} // Function on event press
-          events={courses} // Passing the Array of event
+          events={getWeekly(data)} // Passing the Array of event
           width={windowWidth} // Container width
           //number of dates rendered before & after initDate (def 30 before, 29 after)
           size={60} //initDate defaulting to today
