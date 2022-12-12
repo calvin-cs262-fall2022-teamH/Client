@@ -254,8 +254,8 @@ function HomeScreen({ navigation }) {
   //testing for getWeekly()
 
   //testing client->server
-  const student = "Sarah Johnson";
-  const semesterYear = "Fall 2023";
+  const student = "Braden Lint";
+  const semesterYear = "2023 Spring";
   const [data, setData] = useState([]);
   useEffect(() => {
     fetch('https://workaroundservice.herokuapp.com/'+student+'/'+semesterYear)
@@ -329,6 +329,7 @@ function EditStackScreen() {
 
 function App() {
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -443,7 +444,17 @@ function App() {
               <FontAwesome5
                 name="bell"
                 size={30}
-                color={focused ? '#0167AB' : 'gray'}
+                color={notificationsEnabled ? '#0167AB' : 'gray'}
+                onPress={() => {
+                  // Update the state variable when the button is pressed
+                  setNotificationsEnabled(!notificationsEnabled);
+                  if (!notificationsEnabled) {
+                    alert("Notifications have been enabled");
+                  } else {
+                    alert("Notifications have been disabled");
+                  }
+                }}
+
               ></FontAwesome5>
             </View>
           )
