@@ -9,7 +9,7 @@ const DeleteScreen = props => {
     return (
         <View style={styles.deleteBackground}>
             <View style={styles.square}>
-                <Text style={styles.Title}>Are you sure you want to delete MATH-255?</Text>
+                <Text style={styles.Title}>Are you sure you want to delete PHIL- 205?</Text>
                 <TouchableOpacity onPress={() => NavigateToHome(props)}>
                     <View style={styles.circle}>
                         <Text style={styles.buttonTitle}>Delete</Text>
