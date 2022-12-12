@@ -454,6 +454,7 @@ function App() {
                     alert("Notifications have been disabled");
                   }
                 }}
+
               ></FontAwesome5>
             </View>
           )
