@@ -35,7 +35,7 @@ const EditScreen = (props) => {
   return (
     <View style={styles.EditBackground}>
       <ScrollView>
-        <Text style={styles.EditTitle}>Edit Math-255</Text>
+        <Text style={styles.EditTitle}>Edit PHIL-205</Text>
 
         <Text style={styles.InfoText}>Event Name and Instructor:</Text>
 
