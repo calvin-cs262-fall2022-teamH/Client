@@ -44,7 +44,7 @@ import Delete from "./screens/delete";
 import EditScreen from "./screens/edit";
 import NotificationsScreen from "./screens/notifications";
 import DeleteScreen from './screens/delete';
-
+import AboutScreen from './screens/about';
 
 /*  A space to declare global variables */
 let primary = "#F38C00"; //  default primary color     (orange)
@@ -144,36 +144,37 @@ function Header() {
 
 //takes in date obj and startTime and returns string in format YYYY-MM-DD TT:TT:TT 
 //where date portion is drom date and time is from startTime
-function formatedDate(date, startTime){
-  var month = date.getMonth()+1; //because the month is given as an index
+function formatedDate(date, startTime) {
+  var month = date.getMonth() + 1; //because the month is given as an index
   //for some reason, event calendar needs all single digit values to have a 0 infront, hence all the offsetter values
   var zeroOffsetter = '';
   var dayOffsetter = '';
   var monthOffsetter = '';
   var monthStr = month.toString();
   var day = date.getDate();
-  if (startTime[1] == ':' ){zeroOffsetter = '0';}
-  if (monthStr[1] == ':'){monthOffsetter='0';}
-  if (day<10){dayOffsetter = '0';}
-  return date.getFullYear().toString()+'-'+monthOffsetter+monthStr+'-'+dayOffsetter+day.toString()+' '+zeroOffsetter+startTime+':00';
+  if (startTime[1] == ':') { zeroOffsetter = '0'; }
+  if (monthStr[1] == ':') { monthOffsetter = '0'; }
+  if (day < 10) { dayOffsetter = '0'; }
+  return date.getFullYear().toString() + '-' + monthOffsetter + monthStr + '-' + dayOffsetter + day.toString() + ' ' + zeroOffsetter + startTime + ':00';
 }
 
 //returns {title, summary (location), startTime, endTime}
 //params: values: same as values in getWeekly(), day: int for which day (monday is 1, tuesday is 2 etc), start/endTime in format 'TT:TT:TT'
-function eventObjMaker(values, day, startTime, endTime){
-  const current = new Date().getTime()- 18000000;
+function eventObjMaker(values, day, startTime, endTime) {
+  const current = new Date().getTime() - 18000000;
   const lastSunday = current - (86400000 * new Date(current).getDay());//gets date for last sunday
-  var date = new Date(lastSunday + day*86400000);
+  var date = new Date(lastSunday + day * 86400000);
   const hold = {
-    title: values[1], 
-    summary: values[5], 
-    start: formatedDate(date, startTime), 
-    end: formatedDate(date, endTime)};
+    title: values[1],
+    summary: values[5],
+    start: formatedDate(date, startTime),
+    end: formatedDate(date, endTime)
+  };
   return hold;
 }
 //takes in [{eventID, name, startTime, endTime, dayDesignation, location, eventLead, scheduleID}]
 //returns weekly classes of [{title, summary (location), startTime, endTime}] STARTING ON THE LAST MONDAY
-function getWeekly(classes){
+function getWeekly(classes) {
   var finalClasses = [];
   const regex = /(.*)-(.*)-(.*) (.*)/; //regex to parse startTime and endTime of elements of each course
   for (var i = 0; i < classes.length; i++) {
@@ -181,21 +182,26 @@ function getWeekly(classes){
     var dayDes = values[4];
     // var startTimeData = [...values[2].matchAll(regex)][0]; // [original string, year, month, date, time]
     // var endTimeData = [...values[3].matchAll(regex)][0]; // [original string, year, month, date, time]
-    if (dayDes.includes("M")){finalClasses.push(eventObjMaker(values, 1, values[2], values[3]));}
-    if(dayDes.includes("W")){finalClasses.push(eventObjMaker(values, 3, values[2], values[3]));}
-    if(dayDes.includes("F")){finalClasses.push(eventObjMaker(values, 5, values[2], values[3]));}
-    if(dayDes.includes("TH")){
-      if(dayDes.includes("TWTH") || dayDes.includes("TTH")){
+    if (dayDes.includes("M")) { finalClasses.push(eventObjMaker(values, 1, values[2], values[3])); }
+    if (dayDes.includes("W")) { finalClasses.push(eventObjMaker(values, 3, values[2], values[3])); }
+    if (dayDes.includes("F")) { finalClasses.push(eventObjMaker(values, 5, values[2], values[3])); }
+    if (dayDes.includes("TH")) {
+      if (dayDes.includes("TWTH") || dayDes.includes("TTH")) {
         finalClasses.push(eventObjMaker(values, 2, values[2], values[3]));
-        finalClasses.push(eventObjMaker(values, 4, values[2], values[3]));}
-      else{finalClasses.push(eventObjMaker(values, 4, values[2], values[3]));}}
-    else{
-      if(dayDes.includes("T")){finalClasses.push(eventObjMaker(values, 2, values[2], values[3]));}}
-    if(dayDes.includes("SU")){
-      if(dayDes.includes("SSU")){finalClasses.push(eventObjMaker(values, 6, values[2], values[3]));finalClasses.push(eventObjMaker(values, 7, values[2], values[3]));}
-      else{finalClasses.push(eventObjMaker(values, 7, values[2], values[3]));}}
-    else{
-      if(dayDes.includes("S")){finalClasses.push(eventObjMaker(values, 6, values[2], values[3]));}}
+        finalClasses.push(eventObjMaker(values, 4, values[2], values[3]));
+      }
+      else { finalClasses.push(eventObjMaker(values, 4, values[2], values[3])); }
+    }
+    else {
+      if (dayDes.includes("T")) { finalClasses.push(eventObjMaker(values, 2, values[2], values[3])); }
+    }
+    if (dayDes.includes("SU")) {
+      if (dayDes.includes("SSU")) { finalClasses.push(eventObjMaker(values, 6, values[2], values[3])); finalClasses.push(eventObjMaker(values, 7, values[2], values[3])); }
+      else { finalClasses.push(eventObjMaker(values, 7, values[2], values[3])); }
+    }
+    else {
+      if (dayDes.includes("S")) { finalClasses.push(eventObjMaker(values, 6, values[2], values[3])); }
+    }
   }
   return finalClasses;
 }
@@ -254,14 +260,14 @@ function HomeScreen({ navigation }) {
   //testing for getWeekly()
 
   //testing client->server
-  const student = "Braden Lint";
+  const student = "Logan Humphrey";
   const semesterYear = "2023 Spring";
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch('https://workaroundservice.herokuapp.com/'+student+'/'+semesterYear)
-        .then((response) => response.json())
-        .then((json) => setData(json))
-        .catch((error) => console.error(error));
+    fetch('https://workaroundservice.herokuapp.com/' + student + '/' + semesterYear)
+      .then((response) => response.json())
+      .then((json) => setData(json))
+      .catch((error) => console.error(error));
   }, []);
   //testing client->server
   const editEvent = (event) => {
@@ -323,7 +329,22 @@ function EditStackScreen() {
   );
 };
 
+const SettingsStack = createNativeStackNavigator();
 
+function SettingsStackScreen() {
+  return (
+    <EditStack.Navigator>
+      <HomeStack.Screen name="Settings" component={SettingsScreen} options={{
+        headerShown: false
+      }} />
+      <HomeStack.Screen name="About" component={AboutScreen}
+        options={{
+          headerShown: false
+        }}
+      />
+    </EditStack.Navigator>
+  );
+};
 
 
 
@@ -379,7 +400,7 @@ function App() {
 
 
         {/*Settings Screen Tab*/}
-        <Tab.Screen name={"Settings"} component={SettingsScreen} options={{
+        <Tab.Screen name={"Settings"} component={SettingsStackScreen} options={{
           headerTitle: () => <Header />,
           tabBarIcon: ({ focused }) => (
             <View style={{

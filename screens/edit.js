@@ -43,14 +43,14 @@ const EditScreen = (props) => {
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.writeTaskWrapper}
         >
-          <TextInput style={styles.input} placeholder={"Event Name"} />
+          <TextInput style={styles.input} placeholder={"PHIL-205"} />
         </KeyboardAvoidingView>
 
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.writeTaskWrapper}
         >
-          <TextInput style={styles.input} placeholder={"Instructor (optional)"} />
+          <TextInput style={styles.input} placeholder={"Rebecca DeYoung"} />
         </KeyboardAvoidingView>
 
         <Text style={styles.InfoText}>Location:</Text>
@@ -59,7 +59,7 @@ const EditScreen = (props) => {
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.writeTaskWrapper}
         >
-          <TextInput style={styles.input} placeholder={"Location (optional)"} />
+          <TextInput style={styles.input} placeholder={"Hiemenga Hall 337"} />
         </KeyboardAvoidingView>
 
         <View style={styles.box}>
@@ -93,7 +93,7 @@ const EditScreen = (props) => {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.writeTaskWrapper}
           >
-            <TextInput style={styles.miniInput} placeholder={"0:00 AM"} />
+            <TextInput style={styles.miniInput} placeholder={"09:30 AM"} />
           </KeyboardAvoidingView>
 
           <Text style={styles.toText}>to</Text>
@@ -102,7 +102,7 @@ const EditScreen = (props) => {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.writeTaskWrapper}
           >
-            <TextInput style={styles.miniInput} placeholder={"0:00 PM"} />
+            <TextInput style={styles.miniInput} placeholder={"10:20 PM"} />
           </KeyboardAvoidingView>
         </View>
         <View>
