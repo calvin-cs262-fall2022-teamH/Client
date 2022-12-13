@@ -1,7 +1,7 @@
 /*  WorkAround App.js
 
     desc: Should serve as a home screen for entire app.
-    Will have navigation to Settings.js, Edit.js, &
+    Will have navigation to Settings.js, Edit.js, Profile.js &
     Add.js.
 
     Main components:
@@ -39,8 +39,6 @@ import 'react-native-gesture-handler';
 import SettingsScreen from "./screens/settings";
 import ProfileScreen from "./screens/profile";
 import AddScreen from "./screens/add";
-import Options from "./screens/options";
-import Delete from "./screens/delete";
 import EditScreen from "./screens/edit";
 import NotificationsScreen from "./screens/notifications";
 import DeleteScreen from './screens/delete';
@@ -62,14 +60,6 @@ const Tab = createBottomTabNavigator();
  * to according pages. (e.g. Add button -> Add Page)
  */
 
-/* function: goHome              workAround logo clicked -> homeScreen                */
-function goHome() { }
-/* function: goSettings          settings icon clicked -> settings page               */
-function goSettings() { }
-/* function: goShare             share icon clicked -> share popup                    */
-function goShare() { }
-/* function: goProfile           profile icon clicked -> profiles page                */
-function goProfile() { }
 /* function: goNotification      notification bell icon clicked -> notification popup */
 function goNotification() {
   alert(
@@ -116,31 +106,6 @@ function Header() {
   );
 };
 
-
-// function repeatClasses(classes) {
-//   var finalClasses = [];
-//   const regex = /(.*)-(.*)-(.*) (.*)/; //regex to parse startTime and endTime of elements of each course
-//   for (var i = 0; i < classes.length; i++) {
-//     var values = Object.values(classes[i]); // [name, location, start time, end time]
-//     var startTimeData = [...values[2].matchAll(regex)][0]; // [original string, year, month, date, time]
-//     var endTimeData = [...values[3].matchAll(regex)][0]; // [original string, year, month, date, time]
-//     var startDay = parseInt(startTimeData[2]) * 31 + parseInt(startTimeData[3]);
-//     for (var x = startDay; x <= startDay + 4; x++) { //change middle number to change num days to repeat for+1(note that months are set to 31 days as a standard)
-//       var day = ((x % 31) + 31) % 31; //calculates day
-//       var month = Math.floor(x / 31) % 12; //calculates month
-//       var year = Math.floor(x / 372) + parseInt(startTimeData[1]); //calculates if the year needs added to
-//       var startTime = year.toString() + '-' + month.toString() + '-' + day.toString() + ' ' + startTimeData[4];
-//       var endTime = year.toString() + '-' + month.toString() + '-' + day.toString() + ' ' + endTimeData[4];
-//       finalClasses.push({
-//         title: values[0],
-//         summary: values[1],
-//         start: startTime.toString(),
-//         end: endTime.toString(),
-//       });
-//     }
-//   }
-//   return (finalClasses);
-// }
 
 //takes in date obj and startTime and returns string in format YYYY-MM-DD TT:TT:TT 
 //where date portion is drom date and time is from startTime
@@ -222,6 +187,8 @@ function HomeScreen({ navigation }) {
   let textColor = "black"; //  default textcolor         (black in LM) (white in DM)
   const windowWidth = Dimensions.get("window").width; //full height of screen
   const windowHeight = Dimensions.get("window").height; //full width of screen
+  {/* Back up hard coded classes list
+        ------------------------------*/}
   const courses = [
     {
       title: "CS-108",
@@ -254,10 +221,7 @@ function HomeScreen({ navigation }) {
       end: "2022-11-18 15:50:00",
     },
   ];
-  ///testing for getWeekly()
-  // const classees = [{ eventID: 4, name: "CS-195", startTime: "2022-11-18 15:00:00", endTime: "2022-11-18 15:50:00", dayDesignation: "MTWThFSSu", location: "SB 010", eventLead: "your mom", scheduleID: 3 }];
-  // const events = getWeekly(classees);
-  //testing for getWeekly()
+
 
   //testing client->server
   const student = "Logan Humphrey";
@@ -312,6 +276,8 @@ function HomeStackScreen() {
   );
 };
 
+
+//Edit Screen Stack- Home Screen that takes you to delete page
 const EditStack = createNativeStackNavigator();
 
 function EditStackScreen() {
@@ -329,6 +295,8 @@ function EditStackScreen() {
   );
 };
 
+
+//Settings Screen Stack- Home Screen that takes you to about page
 const SettingsStack = createNativeStackNavigator();
 
 function SettingsStackScreen() {
@@ -346,7 +314,8 @@ function SettingsStackScreen() {
   );
 };
 
-
+{/* START of main App function- includes tab navigator
+        ------------------------------*/}
 
 function App() {
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
